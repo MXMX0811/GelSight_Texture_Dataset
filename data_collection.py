@@ -79,7 +79,7 @@ def main(argv):
     vis3d = gs3drecon.Visualize3D(dev.imgh, dev.imgw, '', mmpp)
     
     # texture_path = input('Input the texture label: ')
-    texture_path = 'NonSlipMat'
+    texture_path = 'PolarFleece'
     texture_path = 'Texture/' + texture_path
     if not os.path.exists(texture_path):
         os.makedirs(texture_path)
@@ -108,6 +108,8 @@ def main(argv):
                 break
             
             crop_x, crop_y, crop_w, crop_h = find_window(rgb_frame)
+            if crop_w == 0 or crop_h  == 0:
+                continue
             crop_w = int(crop_h / 3 * 4)
             cropped_frame = rgb_frame[crop_y:crop_y+crop_h, crop_x:crop_x+crop_w]
 
