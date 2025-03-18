@@ -7,7 +7,7 @@ import pickle
 from gsrobotics.examples import gsdevice, gs3drecon
 
 
-def find_window(frame, threshold=(60, 60, 60)):
+def find_window(frame, threshold=(20, 20, 20)):
     """
     根据RGB阈值动态检测窗口范围。
     :param frame: 输入的彩色帧
@@ -17,6 +17,8 @@ def find_window(frame, threshold=(60, 60, 60)):
     # 创建一个掩码，找到大于阈值的区域（非黑色区域）
     mask = np.all(frame < threshold, axis=-1)
     coords = np.column_stack(np.where(mask))  # 获取非黑色区域坐标
+    
+    print(coords.size)
 
     if coords.size == 0:
         # 如果没有找到非黑色区域，返回整个图像
@@ -29,6 +31,7 @@ def find_window(frame, threshold=(60, 60, 60)):
         coords[:, 1].max() - coords[:, 1].min(),
         coords[:, 0].max() - coords[:, 0].min(),
     )
+    
     return x, y, w, h
 
 def main(argv):
@@ -79,7 +82,7 @@ def main(argv):
     vis3d = gs3drecon.Visualize3D(dev.imgh, dev.imgw, '', mmpp)
     
     # texture_path = input('Input the texture label: ')
-    texture_path = 'PolarFleece'
+    texture_path = 'Coin1'
     texture_path = 'Texture/' + texture_path
     if not os.path.exists(texture_path):
         os.makedirs(texture_path)
