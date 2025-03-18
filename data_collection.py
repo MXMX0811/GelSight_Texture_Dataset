@@ -135,7 +135,12 @@ def main(argv):
             key = cv2.waitKey(100)
             if key == 13 and save_flag == 0:  # Enter 1, save rgb
                 image_name = texture_path + '/' + str(sample_index) + '.jpg'
-                cv2.imwrite(image_name, resized_frame)
+                # select gelsight working area
+                cropped_rate = 0.3
+                cropped_frame_gs = cropped_frame[int(crop_h*(cropped_rate/2)):int(crop_h*(1-cropped_rate/2)), 
+                                                 int(crop_w*(cropped_rate/2)):int(crop_w*(1-cropped_rate/2))]
+                resized_frame_gs = cv2.resize(cropped_frame_gs, (320, 240))
+                cv2.imwrite(image_name, resized_frame_gs)
                 print(f"Saved rgb {image_name}")
                 print("Press enter again to save height map")
                 save_flag = 1
