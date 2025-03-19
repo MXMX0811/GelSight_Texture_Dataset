@@ -180,7 +180,7 @@ class FinalLayer(nn.Module):
         super().__init__()
         self.norm_final = nn.LayerNorm(hidden_size, elementwise_affine=False, eps=1e-6)
         self.linear = nn.Linear(
-            hidden_size, patch_size * patch_size * out_channels * 16, bias=True # Twice MaxPool2d(2)
+            hidden_size, patch_size * patch_size * out_channels, bias=True
         )
         self.adaLN_modulation = nn.Sequential(
             nn.SiLU(),
@@ -225,7 +225,13 @@ class DiT_Llama(nn.Module):
             nn.Conv2d(dim // 2, dim // 2, kernel_size=5, padding=2, stride=1),
             nn.SiLU(),
             nn.GroupNorm(32, dim // 2),
-            nn.MaxPool2d(2),
+            # nn.MaxPool2d(2),
+        )
+        
+        # Inverse nn.MaxPool2d(2)
+        self.upsample_seq = nn.Sequential(
+            nn.ConvTranspose2d(self.out_channels, self.out_channels, kernel_size=2, stride=2),
+            # nn.ConvTranspose2d(self.out_channels, self.out_channels, kernel_size=2, stride=2)
         )
 
         self.x_embedder = nn.Linear(patch_size * patch_size * dim // 2, dim, bias=True)
@@ -248,15 +254,17 @@ class DiT_Llama(nn.Module):
         )
         self.final_layer = FinalLayer(dim, patch_size, self.out_channels)
 
-        self.freqs_cis = DiT_Llama.precompute_freqs_cis(dim // n_heads, 4096)
+        self.freqs_cis = DiT_Llama.precompute_freqs_cis(dim // n_heads, 8192)
 
     def unpatchify(self, x):
         c = self.out_channels
         p = self.patch_size
-        (h, w) = self.in_size
-        x = x.reshape(shape=(x.shape[0], h // p, w // p, p, p, c))
+        h, w = 60, 80
+        print(x.shape)
+        x = x.reshape(shape=(x.shape[0], h, w, p, p, c))
+        print(x.shape)
         x = torch.einsum("nhwpqc->nchpwq", x)
-        imgs = x.reshape(shape=(x.shape[0], c, h, w))
+        imgs = x.reshape(shape=(x.shape[0], c, h * p, w * p))
         return imgs
 
     def patchify(self, x):
@@ -278,16 +286,19 @@ class DiT_Llama(nn.Module):
         x = self.init_conv_seq(x)
 
         x = self.patchify(x)
-        x = self.x_embedder(x)
 
+        x = self.x_embedder(x)
         t = self.t_embedder(t)  # (N, D)
         adaln_input = t.to(x.dtype)
-
+        
         for layer in self.layers:
             x = layer(x, self.freqs_cis[: x.size(1)], adaln_input=adaln_input)
 
         x = self.final_layer(x, adaln_input)
+
         x = self.unpatchify(x)  # (N, out_channels, H, W)
+        
+        x = self.upsample_seq(x)
 
         return x
 

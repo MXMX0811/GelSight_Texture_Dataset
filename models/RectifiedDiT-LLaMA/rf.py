@@ -86,6 +86,9 @@ class TextureDataset(Dataset):
         if self.transform:
             image = self.transform(image)
             heightmap = self.transform(heightmap)
+            
+            image = image * 2 - 1
+            heightmap = heightmap * 2 - 1
         
         return image, heightmap
 
@@ -123,6 +126,7 @@ if __name__ == "__main__":
 
     rf = RF(model)
     optimizer = optim.Adam(model.parameters(), lr=5e-4)
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', factor=0.5, patience=5)
     criterion = torch.nn.MSELoss()
 
     wandb.init(project=f"rfDiT_texture")
@@ -144,6 +148,7 @@ if __name__ == "__main__":
                 lossbin[int(t * 10)] += l
                 losscnt[int(t * 10)] += 1
 
+        scheduler.step(loss)
         # log
         for i in range(10):
             print(f"Epoch: {epoch}, {i} range loss: {lossbin[i] / losscnt[i]}")
@@ -158,8 +163,9 @@ if __name__ == "__main__":
             gif = []
             for image in images:
                 # unnormalize
-                image = image * 0.5 + 0.5
-                image = image.clamp(0, 1)
+                # image = image * 0.5 + 0.5
+                # image = image.clamp(0, 1)
+                image = (image - image.min()) / (image.max() - image.min())
                 x_as_image = make_grid(image.float(), nrow=4)
                 img = x_as_image.permute(1, 2, 0).cpu().numpy()
                 img = (img * 255).astype(np.uint8)
