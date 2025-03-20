@@ -11,7 +11,8 @@ class RF:
         self.model = model
         self.ln = ln
 
-    def forward(self, z1, x):
+    def forward(self, image, heightmap):
+        x = heightmap
         b = x.size(0)
         if self.ln:
             nt = torch.randn((b,)).to(x.device)
@@ -19,7 +20,8 @@ class RF:
         else:
             t = torch.rand((b,)).to(x.device)
         texp = t.view([b, *([1] * len(x.shape[1:]))])
-        #z1 = torch.randn_like(x)
+        # z1 = torch.randn_like(x)
+        z1 = image
         zt = (1 - texp) * x + texp * z1
         vtheta = self.model(zt, t)
         batchwise_mse = ((z1 - x - vtheta) ** 2).mean(dim=list(range(1, len(x.shape))))
@@ -87,8 +89,8 @@ class TextureDataset(Dataset):
             image = self.transform(image)
             heightmap = self.transform(heightmap)
             
-            image = image * 2 - 1
-            heightmap = heightmap * 2 - 1
+            # image = image * 2 - 1
+            # heightmap = heightmap * 2 - 1
         
         return image, heightmap
 
@@ -113,8 +115,7 @@ if __name__ == "__main__":
     
     transform = transforms.Compose([
         transforms.ToTensor(),
-        transforms.Grayscale(num_output_channels=1),
-        transforms.Normalize((0.5,), (0.5,))
+        transforms.Grayscale(num_output_channels=1)
     ])
     
     root_dir = "../../Texture"
@@ -161,9 +162,7 @@ if __name__ == "__main__":
             images = rf.sample(image)
             # image sequences to gif
             gif = []
-            for image in images:
-                # unnormalize
-                # image = image * 0.5 + 0.5
+            for image in images: 
                 # image = image.clamp(0, 1)
                 image = (image - image.min()) / (image.max() - image.min())
                 x_as_image = make_grid(image.float(), nrow=4)

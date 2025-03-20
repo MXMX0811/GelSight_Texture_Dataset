@@ -202,7 +202,7 @@ class DiT_Llama(nn.Module):
         self,
         in_channels=1,
         in_size=(240, 320),
-        patch_size=2,
+        patch_size=8,
         dim=512,
         n_layers=5,
         n_heads=16,
@@ -221,17 +221,9 @@ class DiT_Llama(nn.Module):
             nn.Conv2d(in_channels, dim // 2, kernel_size=5, padding=2, stride=1),
             nn.SiLU(),
             nn.GroupNorm(32, dim // 2),
-            nn.MaxPool2d(2),
             nn.Conv2d(dim // 2, dim // 2, kernel_size=5, padding=2, stride=1),
             nn.SiLU(),
             nn.GroupNorm(32, dim // 2),
-            # nn.MaxPool2d(2),
-        )
-        
-        # Inverse nn.MaxPool2d(2)
-        self.upsample_seq = nn.Sequential(
-            nn.ConvTranspose2d(self.out_channels, self.out_channels, kernel_size=2, stride=2),
-            # nn.ConvTranspose2d(self.out_channels, self.out_channels, kernel_size=2, stride=2)
         )
 
         self.x_embedder = nn.Linear(patch_size * patch_size * dim // 2, dim, bias=True)
@@ -254,15 +246,13 @@ class DiT_Llama(nn.Module):
         )
         self.final_layer = FinalLayer(dim, patch_size, self.out_channels)
 
-        self.freqs_cis = DiT_Llama.precompute_freqs_cis(dim // n_heads, 8192)
+        self.freqs_cis = DiT_Llama.precompute_freqs_cis(dim // n_heads, 4096)
 
     def unpatchify(self, x):
         c = self.out_channels
         p = self.patch_size
-        h, w = 60, 80
-        print(x.shape)
+        h, w = self.in_size[0] // p, self.in_size[1] // p
         x = x.reshape(shape=(x.shape[0], h, w, p, p, c))
-        print(x.shape)
         x = torch.einsum("nhwpqc->nchpwq", x)
         imgs = x.reshape(shape=(x.shape[0], c, h * p, w * p))
         return imgs
@@ -282,11 +272,11 @@ class DiT_Llama(nn.Module):
 
     def forward(self, x, t):
         self.freqs_cis = self.freqs_cis.to(x.device)
-
+        
         x = self.init_conv_seq(x)
 
         x = self.patchify(x)
-
+        
         x = self.x_embedder(x)
         t = self.t_embedder(t)  # (N, D)
         adaln_input = t.to(x.dtype)
@@ -297,8 +287,6 @@ class DiT_Llama(nn.Module):
         x = self.final_layer(x, adaln_input)
 
         x = self.unpatchify(x)  # (N, out_channels, H, W)
-        
-        x = self.upsample_seq(x)
 
         return x
 
