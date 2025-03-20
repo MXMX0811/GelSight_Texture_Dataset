@@ -89,8 +89,7 @@ class TextureDataset(Dataset):
             image = self.transform(image)
             heightmap = self.transform(heightmap)
             
-            # image = image * 2 - 1
-            # heightmap = heightmap * 2 - 1
+            image = image * 2 - 1
         
         return image, heightmap
 
