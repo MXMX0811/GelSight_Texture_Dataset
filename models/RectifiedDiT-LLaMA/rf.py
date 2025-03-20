@@ -128,37 +128,33 @@ if __name__ == "__main__":
     optimizer = optim.Adam(model.parameters(), lr=5e-4)
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', factor=0.5, patience=5)
     criterion = torch.nn.MSELoss()
+    
+    num_epochs = 100
 
     wandb.init(project=f"rfDiT_texture")
 
-    for epoch in range(100):
-        lossbin = {i: 0 for i in range(10)}
-        losscnt = {i: 1e-6 for i in range(10)}
+    for epoch in range(num_epochs):
+        rf.model.train()
+        epoch_loss = 0
         for i, (image, heightmap) in tqdm(enumerate(dataloader)):
             image, heightmap = image.cuda(), heightmap.cuda()
             optimizer.zero_grad()
             loss, blsct = rf.forward(image, heightmap)
             loss.backward()
             optimizer.step()
-
+            
+            epoch_loss += loss.item()
             wandb.log({"loss": loss.item()})
 
-            # count based on t
-            for t, l in blsct:
-                lossbin[int(t * 10)] += l
-                losscnt[int(t * 10)] += 1
-
         scheduler.step(loss)
-        # log
-        for i in range(10):
-            print(f"Epoch: {epoch}, {i} range loss: {lossbin[i] / losscnt[i]}")
+        print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {epoch_loss/len(dataloader):.4f}")
 
-        wandb.log({f"lossbin_{i}": lossbin[i] / losscnt[i] for i in range(10)})
+        wandb.log({f"Epoch Loss": epoch_loss/len(dataloader)})
 
         rf.model.eval()
         with torch.no_grad():
             # init_noise = torch.randn(16, channels, 240, 320).cuda()
-            images = rf.sample(image)
+            images = rf.sample(image, sample_steps=50)
             # image sequences to gif
             gif = []
             for image in images: 
@@ -179,5 +175,4 @@ if __name__ == "__main__":
 
             last_img = gif[-1]
             last_img.save(f"contents/sample_{epoch}_last.png")
-
-        rf.model.train()
+            
