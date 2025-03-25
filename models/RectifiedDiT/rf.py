@@ -130,8 +130,14 @@ if __name__ == "__main__":
     #     channels, dim=3072, n_layers=32, n_heads=32
     # ).cuda()
     
+    # DiT_XL_8
+    # model = DiT_Llama(
+    #     channels, dim=1152, n_layers=28, n_heads=16
+    # ).cuda()
+    
+    # DiT_L_8
     model = DiT_Llama(
-        channels, dim=1024, n_layers=32, n_heads=32
+        channels, dim=1024, n_layers=24, n_heads=16
     ).cuda()
     
     transform = transforms.Compose([
@@ -181,7 +187,7 @@ if __name__ == "__main__":
             (image, heightmap) = next(iter(visualzation_loader))
             image, heightmap = image.cuda(), heightmap.cuda()
 
-            images = rf.sample(image, sample_steps=50)
+            images = rf.sample(image, sample_steps=10)
 
             fig, axes = plt.subplots(3, num_samples, figsize=(num_samples * 2, 6))
             for i in range(num_samples):
@@ -217,5 +223,5 @@ if __name__ == "__main__":
 
             # last_img = gif[-1]
             # last_img.save(f"contents/sample_{epoch}_last.png")
-    torch.save(rf.model.state_dict(), 'DiT.ckpt')
+    torch.save(rf.model.state_dict(), 'DiT_L_8.ckpt')
             
