@@ -3,9 +3,20 @@ import pickle
 import os
 import torch
 import torchvision.transforms as transforms
+import numpy as np
+import torch.optim as optim
+import matplotlib.pyplot as plt
 from torch.utils.data import Dataset, DataLoader
 from thop import profile
 from thop import clever_format
+from PIL import Image
+from torch.utils.data import DataLoader
+from torchvision import datasets, transforms
+from torchvision.utils import make_grid
+from tqdm import tqdm
+
+import wandb
+from dit import DiT_Llama
 
 
 class RF:
@@ -53,7 +64,6 @@ class RF:
         return images
     
     
-
 def get_texture_folders(root_dir):
     return [os.path.join(root_dir, texture) for texture in os.listdir(root_dir) if os.path.isdir(os.path.join(root_dir, texture))]
 
@@ -106,18 +116,6 @@ class TextureDataset(Dataset):
 
 if __name__ == "__main__":
     # train class conditional RF on mnist.
-    import numpy as np
-    import torch.optim as optim
-    import matplotlib.pyplot as plt
-    from PIL import Image
-    from torch.utils.data import DataLoader
-    from torchvision import datasets, transforms
-    from torchvision.utils import make_grid
-    from tqdm import tqdm
-
-    import wandb
-    from dit import DiT_Llama
-
     channels = 1
     
     # FLOPs:  810.926G , parameters:  22.770M
@@ -147,13 +145,13 @@ if __name__ == "__main__":
     
     root_dir = "../../Texture"
     dataset = TextureDataset(root_dir, transform=transform)
-    dataloader = DataLoader(dataset, batch_size=4, shuffle=True)
+    dataloader = DataLoader(dataset, batch_size=4, shuffle=True, num_workers=4)
 
     model_size = sum(p.numel() for p in model.parameters() if p.requires_grad)
     print(f"Number of parameters: {model_size}, {model_size / 1e6}M")
 
     rf = RF(model)
-    optimizer = optim.Adam(model.parameters(), lr=5e-4)
+    optimizer = optim.Adam(rf.model.parameters(), lr=5e-4)
     scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, 'min', factor=0.5, patience=5)
     criterion = torch.nn.MSELoss()
     
@@ -170,11 +168,12 @@ if __name__ == "__main__":
             loss, blsct = rf.forward(image, heightmap)
             loss.backward()
             optimizer.step()
+            torch.nn.utils.clip_grad_norm_(rf.model.parameters(), max_norm=1.0)
             
             epoch_loss += loss.item()
             wandb.log({"loss": loss.item()})
 
-        scheduler.step(loss)
+        scheduler.step(epoch_loss/len(dataloader))
         print(f"Epoch [{epoch+1}/{num_epochs}], Loss: {epoch_loss/len(dataloader):.4f}")
 
         wandb.log({f"Epoch Loss": epoch_loss/len(dataloader)})
