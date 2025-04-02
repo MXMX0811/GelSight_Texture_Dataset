@@ -7,7 +7,7 @@ import pickle
 from gsrobotics.examples import gsdevice, gs3drecon
 
 
-def find_window(frame, threshold=(20, 20, 20)):
+def find_window(frame, threshold=(60, 60, 60)):
     """
     根据RGB阈值动态检测窗口范围。
     :param frame: 输入的彩色帧
@@ -94,7 +94,7 @@ def main(argv):
     vis3d = gs3drecon.Visualize3D(dev.imgh, dev.imgw, '', mmpp)
     
     # texture_path = input('Input the texture label: ')
-    texture_path = 'AluminumPunching3'
+    texture_path = 'HookAndLoop2'
     texture_path = 'Texture/' + texture_path
     if not os.path.exists(texture_path):
         os.makedirs(texture_path)
