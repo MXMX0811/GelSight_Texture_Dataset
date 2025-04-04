@@ -1,1 +1,3 @@
 *.ckpt
+data_collection.py
+visualization.ipynb
