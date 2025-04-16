@@ -62,7 +62,8 @@ class RF:
 
             z = z - dt * vc
             images.append(z)
-        return images
+        # return images
+        return z
     
     
 def get_texture_folders(root_dir):
@@ -117,7 +118,7 @@ class TextureDataset(Dataset):
 
 if __name__ == "__main__":
     # train class conditional RF on mnist.
-    channels = 1
+    channels = 4
     
     # FLOPs:  810.926G , parameters:  22.770M
     # model = DiT_Llama(
@@ -200,7 +201,7 @@ if __name__ == "__main__":
             for i in range(num_samples):
                 axes[0][i].imshow(image[i].permute(1, 2, 0).cpu().numpy(), cmap="gray")
                 axes[0][i].axis("off")
-                axes[1][i].imshow(samples[-1][i].permute(1, 2, 0).cpu().numpy(), cmap="gray")
+                axes[1][i].imshow(samples[i].permute(1, 2, 0).cpu().numpy(), cmap="gray")
                 axes[1][i].axis("off")
                 axes[2][i].imshow(heightmap[i].permute(1, 2, 0).cpu().numpy(), cmap="gray")
                 axes[2][i].axis("off")

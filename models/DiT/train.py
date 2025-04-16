@@ -238,10 +238,9 @@ def main(args):
             (image, heightmap) = next(iter(visualzation_loader))
             image, heightmap = image.cuda(), heightmap.cuda()
             z = vae.encode(image.repeat(1, 3, 1, 1)).latent_dist.sample().mul_(0.18215)
-            model_kwargs = dict(cfg_scale=args.cfg_scale)
 
             samples = diffusion.p_sample_loop(
-                model.forward_with_cfg, z.shape, z, clip_denoised=False, model_kwargs=model_kwargs, progress=True, device='cuda'
+                model.forward, z.shape, z, clip_denoised=False, progress=True, device='cuda'
             )
             samples = vae_mse.decode(samples / 0.18215).sample
             samples = 0.299 * samples[:, 0:1, :, :] + 0.587 * samples[:, 1:2, :, :] + 0.114 * samples[:, 2:3, :, :]
@@ -274,6 +273,5 @@ if __name__ == "__main__":
     parser.add_argument("--num-workers", type=int, default=4)
     parser.add_argument("--log-every", type=int, default=100)
     parser.add_argument("--ckpt-every", type=int, default=50_000)
-    parser.add_argument("--cfg-scale", type=float, default=4.0)
     args = parser.parse_args()
     main(args)
