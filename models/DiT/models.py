@@ -151,7 +151,7 @@ class DiT(nn.Module):
         self,
         input_size=(30, 40),
         patch_size=2,
-        in_channels=1,
+        in_channels=4,
         hidden_size=1152,
         depth=28,
         num_heads=16,

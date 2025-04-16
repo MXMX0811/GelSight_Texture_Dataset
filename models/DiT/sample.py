@@ -1,3 +1,10 @@
+'''
+Author: Mingxin Zhang m.zhang@hapis.k.u-tokyo.ac.jp
+Date: 2023-06-02 09:01:00
+LastEditors: Mingxin Zhang
+LastEditTime: 2025-04-16 17:02:59
+Copyright (c) 2025 by Mingxin Zhang, All Rights Reserved. 
+'''
 # Copyright (c) Meta Platforms, Inc. and affiliates.
 # All rights reserved.
 
