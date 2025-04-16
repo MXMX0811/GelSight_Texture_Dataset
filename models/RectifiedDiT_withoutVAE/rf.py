@@ -14,7 +14,6 @@ from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 from torchvision.utils import make_grid
 from tqdm import tqdm
-from diffusers.models import AutoencoderKL
 
 import wandb
 from dit import DiT_Llama
@@ -146,9 +145,6 @@ if __name__ == "__main__":
     root_dir = "../../Texture"
     dataset = TextureDataset(root_dir, transform=transform)
     dataloader = DataLoader(dataset, batch_size=4, shuffle=True, num_workers=4)
-    
-    vae = AutoencoderKL.from_pretrained(f"stabilityai/sd-vae-ft-ema").cuda()
-    vae_mse = AutoencoderKL.from_pretrained(f"stabilityai/sd-vae-ft-mse").cuda()
 
     model_size = sum(p.numel() for p in model.parameters() if p.requires_grad)
     print(f"Number of parameters: {model_size}, {model_size / 1e6}M")
@@ -167,8 +163,6 @@ if __name__ == "__main__":
         epoch_loss = 0
         for i, (image, heightmap) in tqdm(enumerate(dataloader)):
             image, heightmap = image.cuda(), heightmap.cuda()
-            image = vae.encode(image.repeat(1, 3, 1, 1)).latent_dist.sample().mul_(0.18215)
-            heightmap = vae.encode(heightmap.repeat(1, 3, 1, 1)).latent_dist.sample().mul_(0.18215)
             optimizer.zero_grad()
             loss, blsct = rf.forward(image, heightmap)
             loss.backward()
@@ -190,17 +184,14 @@ if __name__ == "__main__":
             visualzation_loader = DataLoader(dataset, batch_size=num_samples, shuffle=True)
             (image, heightmap) = next(iter(visualzation_loader))
             image, heightmap = image.cuda(), heightmap.cuda()
-            z = vae.encode(image.repeat(1, 3, 1, 1)).latent_dist.sample().mul_(0.18215)
 
-            samples = rf.sample(z, sample_steps=10)
-            samples = vae_mse.decode(samples / 0.18215).sample
-            samples = 0.299 * samples[:, 0:1, :, :] + 0.587 * samples[:, 1:2, :, :] + 0.114 * samples[:, 2:3, :, :]
+            images = rf.sample(image, sample_steps=10)
 
             fig, axes = plt.subplots(3, num_samples, figsize=(num_samples * 2, 6))
             for i in range(num_samples):
                 axes[0][i].imshow(image[i].permute(1, 2, 0).cpu().numpy(), cmap="gray")
                 axes[0][i].axis("off")
-                axes[1][i].imshow(samples[-1][i].permute(1, 2, 0).cpu().numpy(), cmap="gray")
+                axes[1][i].imshow(images[-1][i].permute(1, 2, 0).cpu().numpy(), cmap="gray")
                 axes[1][i].axis("off")
                 axes[2][i].imshow(heightmap[i].permute(1, 2, 0).cpu().numpy(), cmap="gray")
                 axes[2][i].axis("off")

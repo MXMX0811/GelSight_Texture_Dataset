@@ -200,8 +200,8 @@ class FinalLayer(nn.Module):
 class DiT_Llama(nn.Module):
     def __init__(
         self,
-        in_channels=4,
-        in_size=(30, 40),
+        in_channels=1,
+        in_size=(240, 320),
         patch_size=2,
         dim=512,
         n_layers=5,
@@ -246,7 +246,7 @@ class DiT_Llama(nn.Module):
         )
         self.final_layer = FinalLayer(dim, patch_size, self.out_channels)
 
-        self.freqs_cis = DiT_Llama.precompute_freqs_cis(dim // n_heads, 4096)
+        self.freqs_cis = DiT_Llama.precompute_freqs_cis(dim // n_heads, 19200*32)
 
     def unpatchify(self, x):
         c = self.out_channels
