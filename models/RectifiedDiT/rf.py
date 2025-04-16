@@ -128,14 +128,13 @@ if __name__ == "__main__":
     #     channels, dim=3072, n_layers=32, n_heads=32
     # ).cuda()
     
-    # DiT_XL_8
+    # DiT_XL_2
     model = DiT_Llama(
         channels, dim=1152, n_layers=28, n_heads=16
     ).cuda()
     
-    # DiT_L_8
     # model = DiT_Llama(
-    #     channels, dim=1024, n_layers=24, n_heads=16
+    #     channels, dim=512, n_layers=2, n_heads=4
     # ).cuda()
     
     transform = transforms.Compose([
@@ -222,5 +221,5 @@ if __name__ == "__main__":
 
             # last_img = gif[-1]
             # last_img.save(f"contents/sample_{epoch}_last.png")
-    torch.save(rf.model.state_dict(), 'DiT_XL_8.ckpt')
+    torch.save(rf.model.state_dict(), 'DiT_XL_2.ckpt')
             

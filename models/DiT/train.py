@@ -149,7 +149,7 @@ def main(args):
     # Create model:
     # "Image size must be divisible by 8 (for the VAE encoder)." (240, 320) // 8
     # padding for pachify
-    latent_size = (32, 40)
+    latent_size = (30, 40)
     model = DiT_models[args.model](
         input_size=latent_size,
     )
@@ -221,8 +221,6 @@ def main(args):
                 steps_per_sec = log_steps / (end_time - start_time)
                 # Reduce loss history over all processes:
                 avg_loss = torch.tensor(running_loss / log_steps)
-                dist.all_reduce(avg_loss, op=dist.ReduceOp.SUM)
-                avg_loss = avg_loss.item() / dist.get_world_size()
                 print(f"(step={train_steps:07d}) Train Loss: {avg_loss:.4f}, Train Steps/Sec: {steps_per_sec:.2f}")
                 # Reset monitoring variables:
                 running_loss = 0
@@ -238,7 +236,7 @@ if __name__ == "__main__":
     # Default args here will train DiT-XL/2 with the hyperparameters we used in our paper (except training iters).
     parser = argparse.ArgumentParser()
     parser.add_argument("--results-dir", type=str, default="results")
-    parser.add_argument("--model", type=str, choices=list(DiT_models.keys()), default="DiT-L/8")
+    parser.add_argument("--model", type=str, choices=list(DiT_models.keys()), default="DiT-L/2")
     parser.add_argument("--epochs", type=int, default=100)
     parser.add_argument("--global-batch-size", type=int, default=4)
     parser.add_argument("--global-seed", type=int, default=0)

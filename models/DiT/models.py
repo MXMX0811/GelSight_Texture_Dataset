@@ -149,8 +149,8 @@ class DiT(nn.Module):
     """
     def __init__(
         self,
-        input_size=(32, 40),
-        patch_size=8,
+        input_size=(30, 40),
+        patch_size=2,
         in_channels=1,
         hidden_size=1152,
         depth=28,
@@ -224,14 +224,14 @@ class DiT(nn.Module):
         """
         c = self.out_channels
         p = self.x_embedder.patch_size[0]
-        h = 4
-        w = 5
+        h = 15
+        w = 20
         # assert h * w == x.shape[1]
 
         x = x.reshape(shape=(x.shape[0], h, w, p, p, c))
         x = torch.einsum('nhwpqc->nchpwq', x)
         imgs = x.reshape(shape=(x.shape[0], c, h * p, w * p))
-        imgs = imgs[:, :, 1:-1, :]  # remove padding
+        # imgs = imgs[:, :, 1:-1, :]  # remove padding
         return imgs
 
     def forward(self, x, t):
@@ -241,7 +241,7 @@ class DiT(nn.Module):
         t: (N,) tensor of diffusion timesteps
         y: (N,) tensor of class labels
         """
-        x = F.pad(x, (0, 0, 1, 1), mode='reflect')
+        # x = F.pad(x, (0, 0, 1, 1), mode='reflect')
         x = self.x_embedder(x) + self.pos_embed  # (N, T, D), where T = H * W / patch_size ** 2
         t = self.t_embedder(t)                   # (N, D)
         # y = self.y_embedder(y, self.training)    # (N, D)
@@ -283,12 +283,12 @@ def get_2d_sincos_pos_embed(embed_dim, grid_size, cls_token=False, extra_tokens=
     return:
     pos_embed: [grid_size*grid_size, embed_dim] or [1+grid_size*grid_size, embed_dim] (w/ or w/o cls_token)
     """
-    grid_h = np.arange(4, dtype=np.float32)
-    grid_w = np.arange(5, dtype=np.float32)
+    grid_h = np.arange(15, dtype=np.float32)
+    grid_w = np.arange(20, dtype=np.float32)
     grid = np.meshgrid(grid_w, grid_h)  # here w goes first
     grid = np.stack(grid, axis=0)
 
-    grid = grid.reshape([2, 1, 4, 5])
+    grid = grid.reshape([2, 1, 15, 20])
     pos_embed = get_2d_sincos_pos_embed_from_grid(embed_dim, grid)
     if cls_token and extra_tokens > 0:
         pos_embed = np.concatenate([np.zeros([extra_tokens, embed_dim]), pos_embed], axis=0)
