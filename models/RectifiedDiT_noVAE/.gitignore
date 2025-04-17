@@ -5,4 +5,4 @@ wandb
 vae_mds
 ckpt
 flow
-contents
+*.png
