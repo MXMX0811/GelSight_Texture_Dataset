@@ -8,6 +8,7 @@ from diffusers import StableDiffusionPipeline, DDPMScheduler
 from peft import get_peft_model, LoraConfig
 from copy import deepcopy
 from PIL import Image
+from huggingface_hub import snapshot_download, whoami
 import numpy as np
 import argparse
 import pickle
@@ -93,7 +94,17 @@ def main(args):
     device = torch.device("cuda")
 
     # Load SD3.5 Pipeline
-    pipe = StableDiffusionPipeline.from_pretrained(args.model_path, torch_dtype=torch.float16).to(device)
+    try:
+        info = whoami()
+        print(f"Authenticated to Huggingface Hub as: {info['name']}")
+    except Exception as e:
+        raise RuntimeError("You are not logged into Huggingface Hub. Please run 'huggingface-cli login' first.")
+    
+    # if not os.path.exists(args.model_path):
+    #     print(f"Pretrained model not found at {args.model_path}, downloading from Huggingface Hub...")
+    #     args.model_path = snapshot_download(repo_id="stabilityai/stable-diffusion-3.5-large", local_dir=args.model_path)
+        
+    pipe = StableDiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-3.5-large", torch_dtype=torch.float16).to(device)
     vae = pipe.vae
     unet = pipe.unet
     scheduler = DDPMScheduler.from_config(pipe.scheduler.config)
@@ -206,8 +217,7 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", type=str, required=True, help="Path to pre-trained SD3.5 model.")
-    parser.add_argument("--data-root", type=str, required=True, help="Dataset root directory.")
+    parser.add_argument("--model-path", type=str, default="pretrained_models", help="Path to pre-trained SD3.5 model.")
     parser.add_argument("--output-dir", type=str, default="contents", help="Where to save lora adapters.")
     parser.add_argument("--epochs", type=int, default=10)
     parser.add_argument("--batch-size", type=int, default=4)
