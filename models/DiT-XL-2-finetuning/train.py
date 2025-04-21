@@ -172,6 +172,24 @@ def main(args):
     # # experiment_dir = f"{args.results_dir}/{experiment_index:03d}-{model_string_name}"  # Create an experiment folder
     # checkpoint_dir = f"{experiment_dir}/checkpoints"  # Stores saved model checkpoints
     # os.makedirs(checkpoint_dir, exist_ok=True)
+    
+    # Setup data:
+    transform = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Grayscale(num_output_channels=1)
+    ])
+    paired_transform = PairedRandomFlip(p=0.5)
+    root_dir = "../../Texture"
+    dataset = TextureDataset(root_dir, transform=transform, paired_transform=paired_transform)
+    loader = DataLoader(
+        dataset,
+        batch_size=4,
+        shuffle=True,
+        num_workers=args.num_workers,
+        pin_memory=True,
+        drop_last=True
+    )
+    print(f"Dataset contains {len(dataset):,} images")
 
     # Create model:
     # "Image size must be divisible by 8 (for the VAE encoder)." (240, 320) // 8
@@ -205,24 +223,6 @@ def main(args):
     # Setup optimizer (we used default Adam betas=(0.9, 0.999) and a constant learning rate of 1e-4 in our paper):
     opt = torch.optim.AdamW(model.parameters(), lr=2e-5, weight_decay=0)    # all fine-tuning, use a lower lr to avoid forget pretraining
     scheduler = get_scheduler(opt, warmup_steps=500, total_steps=args.epochs * len(loader)) # scheduler for warmup
-
-    # Setup data:
-    transform = transforms.Compose([
-        transforms.ToTensor(),
-        transforms.Grayscale(num_output_channels=1)
-    ])
-    paired_transform = PairedRandomFlip(p=0.5)
-    root_dir = "../../Texture"
-    dataset = TextureDataset(root_dir, transform=transform, paired_transform=paired_transform)
-    loader = DataLoader(
-        dataset,
-        batch_size=4,
-        shuffle=True,
-        num_workers=args.num_workers,
-        pin_memory=True,
-        drop_last=True
-    )
-    print(f"Dataset contains {len(dataset):,} images")
 
     # Prepare models for training:
     update_ema(ema, model, decay=0)  # Ensure EMA is initialized with synced weights
