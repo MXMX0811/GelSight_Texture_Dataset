@@ -189,14 +189,7 @@ def main(args):
     paired_transform = PairedRandomFlip(p=0.5)
     root_dir = "../../Texture"
     dataset = TextureDataset(root_dir, transform=transform, paired_transform=paired_transform)
-    loader = DataLoader(
-        dataset,
-        batch_size=4,
-        shuffle=True,
-        num_workers=args.num_workers,
-        pin_memory=True,
-        drop_last=True
-    )
+    loader = DataLoader(dataset, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers, pin_memory=True)
     print(f"Dataset contains {len(dataset):,} images")
 
     # Prepare models for training:
@@ -284,7 +277,7 @@ if __name__ == "__main__":
     parser.add_argument("--results-dir", type=str, default="results")
     parser.add_argument("--model", type=str, choices=list(DiT_models.keys()), default="DiT-B/2")
     parser.add_argument("--epochs", type=int, default=100)
-    parser.add_argument("--global-batch-size", type=int, default=8)
+    parser.add_argument("--batch-size", type=int, default=8)
     parser.add_argument("--global-seed", type=int, default=0)
     parser.add_argument("--num-workers", type=int, default=4)
     parser.add_argument("--log-every", type=int, default=100)
