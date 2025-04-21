@@ -120,23 +120,14 @@ if __name__ == "__main__":
     # train class conditional RF on mnist.
     channels = 4
     
-    # FLOPs:  810.926G , parameters:  22.770M
-    # model = DiT_Llama(
-    #     channels, dim=256, n_layers=16, n_heads=32
-    # ).cuda()
-    
-    # FLOPs:  73.973T , parameters:  4.598G
-    # model = DiT_Llama(
-    #     channels, dim=3072, n_layers=32, n_heads=32
-    # ).cuda()
-    
-    # DiT_XL_2
+    # DiT_B_2
     model = DiT_Llama(
-        channels, dim=1152, n_layers=28, n_heads=16
+        channels, dim=768, n_layers=12, n_heads=12
     ).cuda()
     
+    # DiT_XL_2
     # model = DiT_Llama(
-    #     channels, dim=512, n_layers=2, n_heads=4
+    #     channels, dim=1152, n_layers=28, n_heads=16
     # ).cuda()
     
     transform = transforms.Compose([
