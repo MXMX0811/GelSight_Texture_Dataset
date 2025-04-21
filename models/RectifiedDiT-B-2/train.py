@@ -86,9 +86,10 @@ class PairedRandomFlip:
 
 
 class TextureDataset(Dataset):
-    def __init__(self, root_dir, transform=None):
+    def __init__(self, root_dir, transform=None, paired_transform=None):
         self.root_dir = root_dir
         self.transform = transform
+        self.paired_transform = paired_transform
         self.file_pairs = self._load_file_pairs()
     
     def _load_file_pairs(self):
