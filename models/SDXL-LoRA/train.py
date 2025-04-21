@@ -4,8 +4,8 @@ import torch
 import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
-from diffusers import StableDiffusionPipeline, DDPMScheduler
-from peft import get_peft_model, LoraConfig
+from diffusers import DiffusionPipeline, DDPMScheduler
+from lora_diffusion import inject_trainable_lora, extract_lora_ups_down
 from copy import deepcopy
 from PIL import Image
 from huggingface_hub import hf_hub_download, whoami
@@ -14,9 +14,8 @@ import argparse
 import pickle
 import matplotlib.pyplot as plt
 
-
 #################################################################################
-#                             Dataset Part                          #
+#                             Dataset Part                                     #
 #################################################################################
 
 def get_texture_folders(root_dir):
@@ -41,47 +40,45 @@ class TextureDataset(Dataset):
         self.transform = transform
         self.paired_transform = paired_transform
         self.file_pairs = self._load_file_pairs()
-    
+
     def _load_file_pairs(self):
         file_pairs = []
         texture_folders = get_texture_folders(self.root_dir)
-        
+
         for texture_folder in texture_folders:
-            texture_name = texture_folder.split("\\")[1]
-            
             files = os.listdir(texture_folder)
             base_names = set(f.split(".")[0] for f in files)
-            
+
             for base in base_names:
                 image_path = os.path.join(texture_folder, f"{base}.jpg")
                 heightmap_path = os.path.join(texture_folder, f"{base}.pkl")
-                
+
                 if os.path.exists(image_path) and os.path.exists(heightmap_path):
                     file_pairs.append((image_path, heightmap_path))
-        
+
         return file_pairs
-    
+
     def __len__(self):
         return len(self.file_pairs)
-    
+
     def __getitem__(self, idx):
         image_path, heightmap_path = self.file_pairs[idx]
         image = Image.open(image_path).convert("RGB")
         with open(heightmap_path, 'rb') as f:
             heightmap = pickle.load(f).astype(np.float32)
-        
+
         if self.transform:
             image = self.transform(image)
             heightmap = self.transform(heightmap)
-            
+
             h_max = heightmap.max()
             h_min = heightmap.min()
             heightmap = (255 * (heightmap - h_min) / (h_max - h_min)).clamp(0, 255).byte()
             heightmap = heightmap / 255
-        
+
         if self.paired_transform:
             image, heightmap = self.paired_transform(image, heightmap)
-        
+
         return image, heightmap
 
 #################################################################################
@@ -89,40 +86,35 @@ class TextureDataset(Dataset):
 #################################################################################
 
 def main(args):
-    assert torch.cuda.is_available(), "Training currently requires at least one GPU."
-
     device = torch.device("cuda")
 
-    # Load SD3.5 Pipeline
+    # Load SDXL Pipeline
     try:
         info = whoami()
         print(f"Authenticated to Huggingface Hub as: {info['name']}")
     except Exception as e:
         raise RuntimeError("You are not logged into Huggingface Hub. Please run 'huggingface-cli login' first.")
-        
-    pipe = StableDiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-3.5-large", cache_dir=args.model_path, torch_dtype=torch.float16).to(device)
+
+    pipe = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-xl-base-1.0", 
+                                             cache_dir=args.model_path, 
+                                             torch_dtype=torch.float16, variant="fp16").to(device)
+
     vae = pipe.vae
     unet = pipe.unet
     scheduler = DDPMScheduler.from_config(pipe.scheduler.config)
 
-    # Insert LoRA into UNet
-    lora_config = LoraConfig(
-        r=args.lora_rank,
-        lora_alpha=args.lora_alpha,
-        target_modules=["Transformer2DModel", "Attention"],
-        lora_dropout=args.lora_dropout,
-        bias="none",
-        task_type="UNET"
-    )
-    unet = get_peft_model(unet, lora_config)
-
-    # Freeze VAE
+    # Freeze VAE and text encoder
     vae.requires_grad_(False)
+    if hasattr(pipe, 'text_encoder'):
+        pipe.text_encoder.requires_grad_(False)
+
+    # Inject LoRA into UNet
+    lora_params, train_names = inject_trainable_lora(unet, r=args.lora_rank, lora_alpha=args.lora_alpha, dropout=args.lora_dropout)
 
     # Optimizer
-    optimizer = torch.optim.AdamW(unet.parameters(), lr=args.lr)
+    optimizer = torch.optim.AdamW(lora_params.parameters(), lr=args.lr)
 
-    # Setup data:
+    # Setup dataset
     transform = transforms.Compose([
         transforms.ToTensor(),
         transforms.Grayscale(num_output_channels=1)
@@ -135,15 +127,14 @@ def main(args):
     print(f"Dataset size: {len(dataset)} samples")
     print(f"Starting training for {args.epochs} epochs...")
 
-    # Training loop
     global_step = 0
     for epoch in range(args.epochs):
         for images, targets in loader:
             images, targets = images.to(device), targets.to(device)
 
             with torch.no_grad():
-                input_latent = vae.encode(images.repeat(1,3,1,1)).latent_dist.sample().mul(0.18215)
-                target_latent = vae.encode(targets.repeat(1,3,1,1)).latent_dist.sample().mul(0.18215)
+                input_latent = vae.encode(images).latent_dist.sample().mul(0.18215)
+                target_latent = vae.encode(targets).latent_dist.sample().mul(0.18215)
 
             noise = torch.randn_like(target_latent)
             timesteps = torch.randint(0, scheduler.config.num_train_timesteps, (target_latent.size(0),), device=device)
@@ -166,62 +157,22 @@ def main(args):
 
             global_step += 1
 
-        # Save checkpoint every epoch
+        # Save LoRA adapters every epoch
         os.makedirs(args.output_dir, exist_ok=True)
-        unet.save_pretrained(os.path.join(args.output_dir, f"lora_epoch_{epoch}.safetensors"))
-        
-        # Inference and save visualization every epoch
-        unet.eval()
-        with torch.no_grad():
-            num_samples = 10
-            visual_loader = DataLoader(dataset, batch_size=num_samples, shuffle=True)
-            images, targets = next(iter(visual_loader))
-            images, targets = images.to(device), targets.to(device)
-
-            input_latent = vae.encode(images.repeat(1,3,1,1)).latent_dist.sample().mul(0.18215)
-
-            noise = torch.randn_like(input_latent)
-            timesteps = torch.randint(0, scheduler.config.num_train_timesteps, (input_latent.size(0),), device=device)
-            noisy_latents = scheduler.add_noise(input_latent, noise, timesteps)
-
-            generated_latents = unet(
-                noisy_latents,
-                timesteps,
-                encoder_hidden_states=input_latent
-            ).sample
-
-            generated_images = vae.decode(generated_latents / 0.18215).sample
-            generated_images = 0.299 * generated_images[:, 0:1, :, :] + 0.587 * generated_images[:, 1:2, :, :] + 0.114 * generated_images[:, 2:3, :, :]
-
-            # Save visualization
-            fig, axes = plt.subplots(3, num_samples, figsize=(num_samples * 2, 6))
-            for i in range(num_samples):
-                axes[0][i].imshow(images[i].cpu().squeeze(), cmap="gray")
-                axes[0][i].axis("off")
-                axes[1][i].imshow(generated_images[i].cpu().squeeze(), cmap="gray")
-                axes[1][i].axis("off")
-                axes[2][i].imshow(targets[i].cpu().squeeze(), cmap="gray")
-                axes[2][i].axis("off")
-            fig.tight_layout()
-            plt.subplots_adjust(wspace=0, hspace=0)
-            plt.suptitle("Epoch {}: Input | Generated | Target".format(epoch))
-            plt.savefig(os.path.join(args.output_dir, f"sample_epoch{epoch}.png"))
-            plt.close()
-
-        unet.train()
-
+        extract_lora_ups_down(unet, save_directory=args.output_dir, save_name=f"lora_epoch_{epoch}.safetensors")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model-path", type=str, default="pretrained_models", help="Path to pre-trained SD3.5 model.")
-    parser.add_argument("--output-dir", type=str, default="contents", help="Where to save lora adapters.")
-    parser.add_argument("--epochs", type=int, default=10)
+    parser.add_argument("--model-path", type=str, default="pretrained_models", help="Path to pre-trained SDXL model cache.")
+    parser.add_argument("--output-dir", type=str, default="contents", help="Where to save LoRA adapters.")
+    parser.add_argument("--epochs", type=int, default=100)
     parser.add_argument("--batch-size", type=int, default=4)
     parser.add_argument("--num-workers", type=int, default=4)
     parser.add_argument("--lr", type=float, default=1e-4)
     parser.add_argument("--lora-rank", type=int, default=16)
     parser.add_argument("--lora-alpha", type=int, default=32)
     parser.add_argument("--lora-dropout", type=float, default=0.1)
+    parser.add_argument("--image-size", type=int, default=512)
     parser.add_argument("--log-every", type=int, default=50)
     args = parser.parse_args()
 
