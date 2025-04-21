@@ -16,6 +16,7 @@ from torchvision.utils import make_grid
 from tqdm import tqdm
 from diffusers.models import AutoencoderKL
 
+import random
 import wandb
 from dit import DiT_Llama
 
@@ -70,6 +71,20 @@ def get_texture_folders(root_dir):
     return [os.path.join(root_dir, texture) for texture in os.listdir(root_dir) if os.path.isdir(os.path.join(root_dir, texture))]
 
 
+class PairedRandomFlip:
+    def __init__(self, p=0.5):
+        self.p = p
+
+    def __call__(self, image, target):
+        if random.random() < self.p:
+            image = transforms.functional.hflip(image)
+            target = transforms.functional.hflip(target)
+        if random.random() < self.p:
+            image = transforms.functional.vflip(image)
+            target = transforms.functional.vflip(target)
+        return image, target
+
+
 class TextureDataset(Dataset):
     def __init__(self, root_dir, transform=None):
         self.root_dir = root_dir
@@ -113,6 +128,9 @@ class TextureDataset(Dataset):
             heightmap = (255 * (heightmap - h_min) / (h_max - h_min)).clamp(0, 255).byte()
             heightmap = heightmap / 255
         
+        if self.paired_transform:
+            image, heightmap = self.paired_transform(image, heightmap)
+        
         return image, heightmap
 
 
@@ -134,10 +152,10 @@ if __name__ == "__main__":
         transforms.ToTensor(),
         transforms.Grayscale(num_output_channels=1)
     ])
-    
+    paired_transform = PairedRandomFlip(p=0.5)
     root_dir = "../../Texture"
-    dataset = TextureDataset(root_dir, transform=transform)
-    dataloader = DataLoader(dataset, batch_size=4, shuffle=True, num_workers=4)
+    dataset = TextureDataset(root_dir, transform=transform, paired_transform=paired_transform)
+    dataloader = DataLoader(dataset, batch_size=8, shuffle=True, num_workers=4)
     
     vae = AutoencoderKL.from_pretrained(f"stabilityai/sd-vae-ft-ema").cuda()
     vae_mse = AutoencoderKL.from_pretrained(f"stabilityai/sd-vae-ft-mse").cuda()

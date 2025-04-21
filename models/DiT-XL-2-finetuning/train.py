@@ -22,10 +22,12 @@ from glob import glob
 from time import time
 import matplotlib.pyplot as plt
 import argparse
+import logging
 import os
 import pickle
 import random
 
+from download import find_model
 from models import DiT_models
 from diffusion import create_diffusion
 from diffusers.models import AutoencoderKL
@@ -142,6 +144,16 @@ class TextureDataset(Dataset):
             image, heightmap = self.paired_transform(image, heightmap)
         
         return image, heightmap
+    
+
+from torch.optim.lr_scheduler import LambdaLR
+
+def get_scheduler(opt, warmup_steps=500, total_steps=10000):
+    def lr_lambda(step):
+        if step < warmup_steps:
+            return step / warmup_steps
+        return 0.5 * (1 + np.cos(np.pi * (step - warmup_steps) / (total_steps - warmup_steps)))
+    return LambdaLR(opt, lr_lambda)
 
 
 #################################################################################
@@ -168,6 +180,19 @@ def main(args):
     model = DiT_models[args.model](
         input_size=latent_size,
     )
+    
+    ckpt_path = args.ckpt or f"DiT-XL-2-256x256.pt"
+    state_dict = find_model(ckpt_path)
+
+    # delete positional embedding
+    # pre-trained positional embedding is 16x16 grid
+    # new positional embedding is 15x20 (240x320 -> VAE -> 30x40 -> pachify 2 -> 15x20)
+    state_dict = {k: v for k, v in state_dict.items() if 'pos_embed' not in k}
+
+    missing_keys, unexpected_keys = model.load_state_dict(state_dict, strict=False)
+    print('Missing keys:', missing_keys)
+    print('Unexpected keys:', unexpected_keys)
+    
     # Note that parameter initialization is done within the DiT constructor
     ema = deepcopy(model).cuda()  # Create an EMA of the model for use after training
     requires_grad(ema, False)
@@ -178,7 +203,8 @@ def main(args):
     print(f"DiT Parameters: {sum(p.numel() for p in model.parameters()):,}")
 
     # Setup optimizer (we used default Adam betas=(0.9, 0.999) and a constant learning rate of 1e-4 in our paper):
-    opt = torch.optim.AdamW(model.parameters(), lr=1e-4, weight_decay=0)
+    opt = torch.optim.AdamW(model.parameters(), lr=2e-5, weight_decay=0)    # all fine-tuning, use a lower lr to avoid forget pretraining
+    scheduler = get_scheduler(opt, warmup_steps=500, total_steps=args.epochs * len(loader)) # scheduler for warmup
 
     # Setup data:
     transform = transforms.Compose([
@@ -225,6 +251,7 @@ def main(args):
             opt.zero_grad()
             loss.backward()
             opt.step()
+            scheduler.step()
             update_ema(ema, model)
 
             # Log loss values:
@@ -281,12 +308,14 @@ if __name__ == "__main__":
     # Default args here will train DiT-XL/2 with the hyperparameters we used in our paper (except training iters).
     parser = argparse.ArgumentParser()
     parser.add_argument("--results-dir", type=str, default="results")
-    parser.add_argument("--model", type=str, choices=list(DiT_models.keys()), default="DiT-B/2")
+    parser.add_argument("--model", type=str, choices=list(DiT_models.keys()), default="DiT-XL/2")
     parser.add_argument("--epochs", type=int, default=100)
-    parser.add_argument("--global-batch-size", type=int, default=8)
+    parser.add_argument("--global-batch-size", type=int, default=4)
     parser.add_argument("--global-seed", type=int, default=0)
     parser.add_argument("--num-workers", type=int, default=4)
     parser.add_argument("--log-every", type=int, default=100)
     parser.add_argument("--ckpt-every", type=int, default=50_000)
+    parser.add_argument("--ckpt", type=str, default=None,
+                        help="Optional path to a DiT checkpoint (default: auto-download a pre-trained DiT-XL/2 model).")
     args = parser.parse_args()
     main(args)

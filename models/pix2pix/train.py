@@ -5,6 +5,7 @@ import pickle
 import numpy as np
 from math import log10
 from PIL import Image
+import random
 
 import torch
 import torch.nn as nn
@@ -18,6 +19,20 @@ from networks import define_G, define_D, GANLoss, get_scheduler, update_learning
 
 def get_texture_folders(root_dir):
     return [os.path.join(root_dir, texture) for texture in os.listdir(root_dir) if os.path.isdir(os.path.join(root_dir, texture))]
+
+
+class PairedRandomFlip:
+    def __init__(self, p=0.5):
+        self.p = p
+
+    def __call__(self, image, target):
+        if random.random() < self.p:
+            image = transforms.functional.hflip(image)
+            target = transforms.functional.hflip(target)
+        if random.random() < self.p:
+            image = transforms.functional.vflip(image)
+            target = transforms.functional.vflip(target)
+        return image, target
 
 
 class TextureDataset(Dataset):
@@ -62,6 +77,9 @@ class TextureDataset(Dataset):
             h_min = heightmap.min()
             heightmap = (255 * (heightmap - h_min) / (h_max - h_min)).clamp(0, 255).byte()
             heightmap = heightmap / 255
+            
+        if self.paired_transform:
+            image, heightmap = self.paired_transform(image, heightmap)
         
         return image, heightmap
 
@@ -81,8 +99,9 @@ def main(opt):
         transforms.ToTensor(),
         transforms.Grayscale(num_output_channels=1)
     ])
+    paired_transform = PairedRandomFlip(p=0.5)
     root_dir = "../../Texture"
-    dataset = TextureDataset(root_dir, transform=transform)
+    dataset = TextureDataset(root_dir, transform=transform, paired_transform=paired_transform)
 
     training_data_loader = DataLoader(dataset=dataset, num_workers=opt.threads, batch_size=opt.batch_size, shuffle=True)
 
