@@ -208,7 +208,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--model-path", type=str, required=True, help="Path to pre-trained SD3.5 model.")
     parser.add_argument("--data-root", type=str, required=True, help="Dataset root directory.")
-    parser.add_argument("--output-dir", type=str, default="lora_output", help="Where to save lora adapters.")
+    parser.add_argument("--output-dir", type=str, default="contents", help="Where to save lora adapters.")
     parser.add_argument("--epochs", type=int, default=10)
     parser.add_argument("--batch-size", type=int, default=4)
     parser.add_argument("--num-workers", type=int, default=4)
