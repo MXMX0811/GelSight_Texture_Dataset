@@ -8,7 +8,7 @@ from diffusers import StableDiffusionPipeline, DDPMScheduler
 from peft import get_peft_model, LoraConfig
 from copy import deepcopy
 from PIL import Image
-from huggingface_hub import snapshot_download, whoami
+from huggingface_hub import hf_hub_download, whoami
 import numpy as np
 import argparse
 import pickle
@@ -99,12 +99,8 @@ def main(args):
         print(f"Authenticated to Huggingface Hub as: {info['name']}")
     except Exception as e:
         raise RuntimeError("You are not logged into Huggingface Hub. Please run 'huggingface-cli login' first.")
-    
-    # if not os.path.exists(args.model_path):
-    #     print(f"Pretrained model not found at {args.model_path}, downloading from Huggingface Hub...")
-    #     args.model_path = snapshot_download(repo_id="stabilityai/stable-diffusion-3.5-large", local_dir=args.model_path)
         
-    pipe = StableDiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-3.5-large", torch_dtype=torch.float16).to(device)
+    pipe = StableDiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-3.5-large", cache_dir=args.model_path, torch_dtype=torch.float16).to(device)
     vae = pipe.vae
     unet = pipe.unet
     scheduler = DDPMScheduler.from_config(pipe.scheduler.config)
