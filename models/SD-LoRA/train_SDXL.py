@@ -112,6 +112,18 @@ def main(args):
         target_modules=["to_k", "to_q", "to_v", "to_out.0", "add_k_proj", "add_v_proj"],
     )
     unet.add_adapter(unet_lora_config)
+    
+    def print_trainable_parameters(model):
+        total_params = 0
+        total_trainable_params = 0
+        for param in model.parameters():
+            num_params = param.numel()
+            total_params += num_params
+            if param.requires_grad:
+                total_trainable_params += num_params
+        print(f"trainable params: {total_params} || all params: {total_trainable_params} || trainable%: {total_trainable_params / total_params * 100}")
+        
+    print_trainable_parameters(unet)
 
     vae.to(DEVICE, dtype=weight_dtype)
     unet.to(DEVICE, dtype=weight_dtype)
@@ -143,9 +155,9 @@ def main(args):
                 input_latents = vae.encode(input_images.repeat(1, 3, 1, 1)).latent_dist.sample() * vae.config.scaling_factor
                 target_latents = vae.encode(target_images.repeat(1, 3, 1, 1)).latent_dist.sample() * vae.config.scaling_factor
 
-            noise = torch.randn_like(target_latents)
-            timesteps = torch.randint(0, noise_scheduler.config.num_train_timesteps, (target_latents.shape[0],), device=DEVICE).long()
-            noisy_latents = noise_scheduler.add_noise(target_latents, noise, timesteps)
+            noise = torch.randn_like(input_latents)
+            timesteps = torch.randint(0, noise_scheduler.config.num_train_timesteps, (input_latents.shape[0],), device=DEVICE).long()
+            noisy_latents = noise_scheduler.add_noise(input_latents, noise, timesteps)
             
             # 平均池化压缩后送入线性层变成 text_embeds (1280维)
             pooled = torch.nn.functional.adaptive_avg_pool2d(input_latents, (1, 1)).squeeze(-1).squeeze(-1)
@@ -153,10 +165,10 @@ def main(args):
 
             # 构造 dummy time_ids（默认分辨率信息）
             time_ids = torch.tensor([[0.0, 0.0, 1.0, 1.0, 512, 512]] * input_latents.shape[0]).to(DEVICE, dtype=weight_dtype)
-            encoder_hidden_states = torch.zeros((target_latents.shape[0], 77, 2048), device=DEVICE, dtype=weight_dtype)
+            encoder_hidden_states = torch.zeros((input_latents.shape[0], 77, 2048), device=DEVICE, dtype=weight_dtype)
 
             model_pred = unet(
-                sample=noisy_latents,
+                sample=input_latents,
                 timestep=timesteps,
                 encoder_hidden_states=encoder_hidden_states,
                 added_cond_kwargs={
@@ -167,12 +179,12 @@ def main(args):
             ).sample
 
             if not snr_gamma:
-                loss = F.mse_loss(model_pred.float(), noise.float(), reduction="mean")
+                loss = F.mse_loss(model_pred.float(), target_latents.float(), reduction="mean")
             else:
                 snr = compute_snr(noise_scheduler, timesteps)
                 mse_loss_weights = torch.stack([snr, snr_gamma * torch.ones_like(timesteps)], dim=1).min(dim=1)[0]
                 mse_loss_weights = mse_loss_weights / snr
-                loss = F.mse_loss(model_pred.float(), noise.float(), reduction="none")
+                loss = F.mse_loss(model_pred.float(), target_latents.float(), reduction="none")
                 loss = loss.mean(dim=list(range(1, len(loss.shape)))) * mse_loss_weights
                 loss = loss.mean()
 
@@ -197,24 +209,36 @@ def main(args):
             num_samples = 10
             visualization_loader = DataLoader(dataset, batch_size=num_samples, shuffle=True)
             image, heightmap = next(iter(visualization_loader))
-            image, heightmap = image.to(DEVICE), heightmap.to(DEVICE)
+            image, heightmap = image.to(DEVICE, dtype=weight_dtype), heightmap.to(DEVICE, dtype=weight_dtype)
 
             z = vae.encode(image.repeat(1, 3, 1, 1)).latent_dist.sample() * vae.config.scaling_factor
             noisy_z = z + torch.randn_like(z)
-            timesteps_vis = torch.randint(0, noise_scheduler.config.num_train_timesteps, (num_samples,), device=DEVICE).long()
+            timesteps_vis = torch.randint(0, noise_scheduler.config.num_train_timesteps, (num_samples,), device=DEVICE, dtype=weight_dtype)
+            
+            # 构造 SDXL 条件
+            pooled = F.adaptive_avg_pool2d(z, (1, 1)).squeeze(-1).squeeze(-1)
+            text_embeds = torch.nn.Linear(z.shape[1], 1280).to(DEVICE, dtype=weight_dtype)(pooled)
+            time_ids = torch.tensor([[0.0, 0.0, 1.0, 1.0, 512, 512]] * z.shape[0], device=DEVICE, dtype=weight_dtype)
+            encoder_hidden_states = torch.zeros((z.shape[0], 77, 2048), device=DEVICE, dtype=weight_dtype)
 
-            samples = unet(noisy_z, timesteps_vis, encoder_hidden_states=None,
-                           added_cond_kwargs={"image_embeds": z}).sample
+            # 调用 UNet 推理
+            samples = unet(
+                noisy_z,
+                timesteps_vis,
+                encoder_hidden_states=encoder_hidden_states,
+                added_cond_kwargs={"text_embeds": text_embeds, "time_ids": time_ids}
+            ).sample
+
             samples = vae.decode(samples / vae.config.scaling_factor).sample
             samples = 0.299 * samples[:, 0:1] + 0.587 * samples[:, 1:2] + 0.114 * samples[:, 2:3]
 
             fig, axes = plt.subplots(3, num_samples, figsize=(num_samples * 2, 6))
             for i in range(num_samples):
-                axes[0][i].imshow(image[i].squeeze().cpu().numpy(), cmap="gray")
+                axes[0][i].imshow(image[i].squeeze().to(torch.float32).cpu().numpy(), cmap="gray")
                 axes[0][i].axis("off")
-                axes[1][i].imshow(samples[i].squeeze().cpu().numpy(), cmap="gray")
+                axes[1][i].imshow(samples[i].squeeze().to(torch.float32).cpu().numpy(), cmap="gray")
                 axes[1][i].axis("off")
-                axes[2][i].imshow(heightmap[i].squeeze().cpu().numpy(), cmap="gray")
+                axes[2][i].imshow(heightmap[i].squeeze().to(torch.float32).cpu().numpy(), cmap="gray")
                 axes[2][i].axis("off")
 
             fig.tight_layout()
@@ -233,12 +257,12 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--model-path", type=str, default="pretrained_models")
-    parser.add_argument("--output-dir", type=str, default="lora_outputs")
+    parser.add_argument("--output-dir", type=str, default="contents")
     parser.add_argument("--data-dir", type=str, default="../../Texture")
     parser.add_argument("--epochs", type=int, default=10)
-    parser.add_argument("--batch-size", type=int, default=4)
+    parser.add_argument("--batch-size", type=int, default=16)
     parser.add_argument("--num-workers", type=int, default=4)
-    parser.add_argument("--lr", type=float, default=1e-4)
+    parser.add_argument("--lr", type=float, default=1e-5)
     parser.add_argument("--lora-rank", type=int, default=16)
     parser.add_argument("--lora-alpha", type=int, default=32)
     args = parser.parse_args()
