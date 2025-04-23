@@ -121,7 +121,7 @@ def main(args):
             total_params += num_params
             if param.requires_grad:
                 total_trainable_params += num_params
-        print(f"trainable params: {total_params} || all params: {total_trainable_params} || trainable%: {total_trainable_params / total_params * 100}")
+        print(f"trainable params: {total_params:,} || all params: {total_trainable_params:,} || trainable%: {total_trainable_params / total_params * 100}")
         
     print_trainable_parameters(unet)
 
