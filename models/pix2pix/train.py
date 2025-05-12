@@ -111,6 +111,9 @@ def main(opt):
     print('===> Building models')
     net_g = define_G(opt.input_nc, opt.output_nc, opt.ngf, 'batch', False, 'normal', 0.02, gpu_id=device)
     net_d = define_D(opt.input_nc + opt.output_nc, opt.ndf, 'basic', gpu_id=device)
+    
+    print(f"Generator Parameters: {sum(p.numel() for p in net_g.parameters()):,}")
+    print(f"Discriminator Parameters: {sum(p.numel() for p in net_d.parameters()):,}")
 
     criterionGAN = GANLoss().to(device)
     criterionL1 = nn.L1Loss().to(device)
