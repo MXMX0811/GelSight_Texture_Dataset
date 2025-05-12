@@ -21,7 +21,6 @@ from diffusers.models import AutoencoderKL
 
 import random
 import wandb
-from dit import DiT_Llama
 
 
 class RF:
@@ -152,15 +151,10 @@ if __name__ == "__main__":
     # train class conditional RF on mnist.
     channels = 4
     
-    # DiT_B_2
-    # model = DiT_Llama(
-    #     channels, dim=768, n_layers=12, n_heads=12
-    # ).cuda()
-    
-    # DiT_XL_2
-    model = DiT_Llama(
-        channels, dim=1152, n_layers=28, n_heads=16
-    ).cuda()
+    latent_size = (30, 40)
+    model = DiT_models["DiT-XL/2"](
+        input_size=latent_size,
+    )
     
     transform = transforms.Compose([
         transforms.ToTensor(),

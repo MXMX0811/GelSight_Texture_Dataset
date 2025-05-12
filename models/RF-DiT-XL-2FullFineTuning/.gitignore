@@ -6,3 +6,4 @@ vae_mds
 ckpt
 flow
 *.png
+*.pt
