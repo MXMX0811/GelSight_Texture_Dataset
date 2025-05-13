@@ -46,9 +46,13 @@ class RF:
         # print("FLOPs: ", flops, ", parameters: ", params)
         
         vtheta = self.model(zt, t)
-        print(vtheta.shape)
-        print(z1.shape)
-        print(x.shape)
+        
+        B, C = x.shape[:2]
+        assert vtheta.shape == (B, C * 2, *x.shape[2:])
+        vtheta, model_var_values = torch.split(vtheta, C, dim=1)
+        # Learn the variance using the variational bound, but don't let
+        # it affect our mean prediction.
+
         batchwise_mse = ((z1 - x - vtheta) ** 2).mean(dim=list(range(1, len(x.shape))))
         tlist = batchwise_mse.detach().cpu().reshape(-1).tolist()
         ttloss = [(tv, tloss) for tv, tloss in zip(t, tlist)]
