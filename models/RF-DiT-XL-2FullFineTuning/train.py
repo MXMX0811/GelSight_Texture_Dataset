@@ -69,6 +69,10 @@ class RF:
             t = torch.tensor([t] * b).to(z.device)
 
             vc = self.model(z, t)
+            
+            B, C = z.shape[:2]
+            assert vc.shape == (B, C * 2, *z.shape[2:])
+            vc, model_var_values = torch.split(vc, C, dim=1)
 
             z = z - dt * vc
             images.append(z)
