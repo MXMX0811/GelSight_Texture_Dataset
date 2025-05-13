@@ -46,6 +46,9 @@ class RF:
         # print("FLOPs: ", flops, ", parameters: ", params)
         
         vtheta = self.model(zt, t)
+        print(vtheta.shape)
+        print(z1.shape)
+        print(x.shape)
         batchwise_mse = ((z1 - x - vtheta) ** 2).mean(dim=list(range(1, len(x.shape))))
         tlist = batchwise_mse.detach().cpu().reshape(-1).tolist()
         ttloss = [(tv, tloss) for tv, tloss in zip(t, tlist)]
@@ -176,6 +179,7 @@ if __name__ == "__main__":
     missing_keys, unexpected_keys = model.load_state_dict(state_dict, strict=False)
     print('Missing keys:', missing_keys)
     print('Unexpected keys:', unexpected_keys)
+    model = model.cuda()
     
     vae = AutoencoderKL.from_pretrained(f"stabilityai/sd-vae-ft-ema").cuda()
     vae_mse = AutoencoderKL.from_pretrained(f"stabilityai/sd-vae-ft-mse").cuda()
@@ -190,7 +194,6 @@ if __name__ == "__main__":
     scheduler = get_scheduler(optimizer, warmup_steps=500, total_steps=num_epochs * len(dataloader))
     criterion = torch.nn.MSELoss()
     
-
     wandb.init(project=f"rfDiT_texture")
 
     for epoch in range(num_epochs):
