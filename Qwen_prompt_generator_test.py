@@ -2,7 +2,7 @@
 Author: Mingxin Zhang m.zhang@hapis.k.u-tokyo.ac.jp
 Date: 2025-08-26 03:33:21
 LastEditors: Mingxin Zhang
-LastEditTime: 2025-09-03 18:05:34
+LastEditTime: 2025-09-03 18:33:33
 Copyright (c) 2025 by Mingxin Zhang, All Rights Reserved. 
 '''
 import os
@@ -37,7 +37,7 @@ if __name__ == "__main__":
     query = tokenizer.from_list_format([
         # {'image': 'https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg'}, # Either a local path or an url
         # {'text': '这是什么?'},
-        {'image': DIR + '/Texture/Leather/1.jpg'},
+        {'image': DIR + '/Texture/Carpet/1.jpg'},
         {'text': 'Carefully observe the surface texture of the material shown in the image and describe its tactile characteristics in detail. \
                   Your description should include:\
                   •	Roughness level (e.g., smooth, fine, grainy, prickly)\
