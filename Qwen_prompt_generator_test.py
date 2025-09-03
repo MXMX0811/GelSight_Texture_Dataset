@@ -2,7 +2,7 @@
 Author: Mingxin Zhang m.zhang@hapis.k.u-tokyo.ac.jp
 Date: 2025-08-26 03:33:21
 LastEditors: Mingxin Zhang
-LastEditTime: 2025-09-03 16:56:53
+LastEditTime: 2025-09-03 18:05:34
 Copyright (c) 2025 by Mingxin Zhang, All Rights Reserved. 
 '''
 import os
@@ -44,7 +44,7 @@ if __name__ == "__main__":
                   •	Macroscopic structure (e.g., patterned ridges, grooves, undulations)\
                   •	Microscopic structure (e.g., tiny granules, fuzziness, porous feel)\
                   •	Inferred tactile impression (overall hardness or softness of the surface, such as soft, rigid, slightly elastic)\
-                  Generate a passage that conveys the tactile experience of this material, suitable for use in a haptic feedback generation task.'},
+                  Generate a passage that conveys the tactile features of this material, suitable for use in a haptic feedback generation task.'},
     ])
     response, history = model.chat(tokenizer, query=query, history=None)
     print(response)

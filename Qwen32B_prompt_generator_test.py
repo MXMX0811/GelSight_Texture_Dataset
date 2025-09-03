@@ -50,7 +50,7 @@ if __name__ == "__main__":
                              •	Macroscopic structure (e.g., patterned ridges, grooves, undulations)\
                              •	Microscopic structure (e.g., tiny granules, fuzziness, porous feel)\
                              •	Inferred tactile impression (overall hardness or softness of the surface, such as soft, rigid, slightly elastic)\
-                             Generate a passage that conveys the tactile experience of this material, suitable for use in a haptic feedback generation task.'
+                             Generate a passage that conveys the tactile features of this material, suitable for use in a haptic feedback generation task.'
                 },
             ],
         }
