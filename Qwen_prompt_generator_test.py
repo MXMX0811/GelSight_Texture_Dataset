@@ -2,16 +2,19 @@
 Author: Mingxin Zhang m.zhang@hapis.k.u-tokyo.ac.jp
 Date: 2025-08-26 03:33:21
 LastEditors: Mingxin Zhang
-LastEditTime: 2025-09-03 18:33:33
+LastEditTime: 2025-09-03 19:13:10
 Copyright (c) 2025 by Mingxin Zhang, All Rights Reserved. 
 '''
 import os
 import torch
+import gc
 from PIL import Image
 from transformers import AutoModel, AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 from transformers.generation import GenerationConfig
 from pathlib import Path
 from download import download_model
+
+gc.collect(); torch.cuda.empty_cache()
 
 # Script path
 DIR = str(Path(__file__).resolve().parent)
@@ -30,6 +33,8 @@ if __name__ == "__main__":
     # Load
     model = AutoModelForCausalLM.from_pretrained(model_path + model_name, trust_remote_code=True).eval()
     model = model.to(device='cuda')
+    
+    print(f"Model Parameters: {sum(p.numel() for p in model.parameters()):,}")
 
     tokenizer = AutoTokenizer.from_pretrained(model_path + model_name, trust_remote_code=True)
     model.generation_config = GenerationConfig.from_pretrained(model_path + model_name, trust_remote_code=True)
@@ -37,7 +42,7 @@ if __name__ == "__main__":
     query = tokenizer.from_list_format([
         # {'image': 'https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg'}, # Either a local path or an url
         # {'text': '这是什么?'},
-        {'image': DIR + '/Texture/Carpet/1.jpg'},
+        {'image': DIR + '/Texture/Wallpaper2/1.jpg'},
         {'text': 'Carefully observe the surface texture of the material shown in the image and describe its tactile characteristics in detail. \
                   Your description should include:\
                   •	Roughness level (e.g., smooth, fine, grainy, prickly)\

@@ -2,7 +2,7 @@
 Author: Mingxin Zhang m.zhang@hapis.k.u-tokyo.ac.jp
 Date: 2025-08-26 03:33:21
 LastEditors: Mingxin Zhang
-LastEditTime: 2025-09-03 17:55:19
+LastEditTime: 2025-09-03 19:14:15
 Copyright (c) 2025 by Mingxin Zhang, All Rights Reserved. 
 '''
 import os
@@ -29,6 +29,8 @@ if __name__ == "__main__":
     # Load
     model = AutoModel.from_pretrained(model_path + model_name, trust_remote_code=True, torch_dtype=torch.bfloat16, local_files_only=True).eval()
     model = model.to(device='cuda')
+    
+    print(f"Model Parameters: {sum(p.numel() for p in model.parameters()):,}")
 
     tokenizer = AutoTokenizer.from_pretrained(model_path + model_name, trust_remote_code=True)
 
