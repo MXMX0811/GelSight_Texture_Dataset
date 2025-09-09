@@ -2,7 +2,7 @@
 Author: Mingxin Zhang m.zhang@hapis.k.u-tokyo.ac.jp
 Date: 2025-08-26 03:33:21
 LastEditors: Mingxin Zhang
-LastEditTime: 2025-09-10 01:43:19
+LastEditTime: 2025-09-10 06:32:41
 Copyright (c) 2025 by Mingxin Zhang, All Rights Reserved. 
 '''
 import os
@@ -10,7 +10,6 @@ import torch
 import gc
 import json
 import random
-from PIL import Image
 from transformers import AutoModel, AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 from transformers.generation import GenerationConfig
 from pathlib import Path
@@ -61,21 +60,33 @@ if __name__ == "__main__":
         sampled_i = random.sample(range(1, 21), 5)
         for i in range(5): # generate 5 prompts for each texture
             query = tokenizer.from_list_format([
-                # {'image': 'https://qianwen-res.oss-cn-beijing.aliyuncs.com/Qwen-VL/assets/demo.jpeg'}, # Either a local path or an url
-                # {'text': '这是什么?'},
                 {'image': image_path + '/' + str(sampled_i[i]) + '.jpg'},
-                {'text': 'Carefully observe the surface texture shown in the image and describe its tactile characteristics in detail. \
-                        Your description should include:\
+                {'text': 'Carefully observe the surface texture shown in the image and describe its tactile characteristics.\
+                        You should include detailed quantitative descriptions of the following aspects:\
                         •	Roughness level (e.g., smooth, fine, grainy, prickly)\
                         •	Macroscopic structure (e.g., patterned ridges, grooves, undulations)\
                         •	Microscopic structure (e.g., tiny granules, fuzziness, porous feel)\
-                        •	Inferred tactile impression when pressing vertically on the shown surface or stroking the surface horizontally according to the material (such as soft, rigid)\
-                        Generate an English passage that conveys the tactile features of this material, suitable for use in a haptic feedback generation task.'},
+                        •	Inferred tactile impression according to the material (such as soft, rigid)\
+                        The description should be suitable for use in a haptic feedback generation task.\
+                        Use accurate, objective and concise descriptions. Use short sentences.\
+                        Avoid overly subjective language and unnecessary embellishments.\
+                        Do not use subjects and introductory phrases at the beginning of the response.\
+                        No filler.\
+                        Use English to answer.'},
             ])
-            response, history = model.chat(tokenizer, query=query, history=None)
+            response, history = model.chat(tokenizer, 
+                                           query=query, 
+                                           history=None,
+                                           top_k = 1,
+                                           top_p = 0.001,
+                                           max_new_tokens = 8192,
+                                           temperature = 0.01,
+                                           repetition_penalty = 1,
+                                           do_sample = 1
+                                           )
+            
             prompts[str(texture_name)][str(model_name)][str(i+1)] = response
         # save json
         with open(image_path + '/prompts.json', 'w') as f:
             json.dump(prompts, f, indent=4)
         print(f"Prompts for {texture_name} saved.")
-        break

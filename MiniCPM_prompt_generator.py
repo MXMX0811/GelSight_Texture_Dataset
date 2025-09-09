@@ -2,7 +2,7 @@
 Author: Mingxin Zhang m.zhang@hapis.k.u-tokyo.ac.jp
 Date: 2025-08-26 03:33:21
 LastEditors: Mingxin Zhang
-LastEditTime: 2025-09-10 01:43:41
+LastEditTime: 2025-09-10 06:32:27
 Copyright (c) 2025 by Mingxin Zhang, All Rights Reserved. 
 '''
 import os
@@ -56,13 +56,18 @@ if __name__ == "__main__":
         sampled_i = random.sample(range(1, 21), 5)
         for i in range(5): # generate 5 prompts for each texture
             image = Image.open(image_path + '/' + str(sampled_i[i]) + '.jpg').convert('RGB')
-            question = 'Carefully observe the surface texture shown in the image and describe its tactile characteristics in detail. \
-                            Your description should include:\
-                            •	Roughness level (e.g., smooth, fine, grainy, prickly)\
-                            •	Macroscopic structure (e.g., patterned ridges, grooves, undulations)\
-                            •	Microscopic structure (e.g., tiny granules, fuzziness, porous feel)\
-                            •	Inferred tactile impression when pressing vertically on the shown surface or stroking the surface horizontally according to the material (such as soft, rigid)\
-                            Generate an English passage that conveys the tactile features of this material, suitable for use in a haptic feedback generation task.'
+            question = 'Carefully observe the surface texture shown in the image and describe its tactile characteristics.\
+                        You should include detailed quantitative descriptions of the following aspects:\
+                        •	Roughness level (e.g., smooth, fine, grainy, prickly)\
+                        •	Macroscopic structure (e.g., patterned ridges, grooves, undulations)\
+                        •	Microscopic structure (e.g., tiny granules, fuzziness, porous feel)\
+                        •	Inferred tactile impression according to the material (such as soft, rigid)\
+                        The description should be suitable for use in a haptic feedback generation task.\
+                        Use accurate, objective and concise descriptions. Use short sentences.\
+                        Avoid overly subjective language and unnecessary embellishments.\
+                        Do not use subjects and introductory phrases at the beginning of the response.\
+                        No filler.\
+                        Use English to answer.'
             msgs = [{'role': 'user', 'content': question}]
 
             res = model.chat(
@@ -70,7 +75,7 @@ if __name__ == "__main__":
                 msgs=msgs,
                 tokenizer=tokenizer,
                 sampling=True, # if sampling=False, beam_search will be used by default
-                temperature=0.7,
+                temperature=0.7
                 # system_prompt='' # pass system_prompt if needed
             )
             
@@ -79,4 +84,3 @@ if __name__ == "__main__":
         with open(image_path + '/prompts.json', 'w') as f:
             json.dump(prompts, f, indent=4)
         print(f"Prompts for {texture_name} saved.")
-        break
