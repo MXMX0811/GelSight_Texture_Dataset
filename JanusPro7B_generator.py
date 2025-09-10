@@ -2,7 +2,7 @@
 Author: Mingxin Zhang m.zhang@hapis.k.u-tokyo.ac.jp
 Date: 2025-08-26 03:33:21
 LastEditors: Mingxin Zhang
-LastEditTime: 2025-09-11 01:36:11
+LastEditTime: 2025-09-11 01:38:27
 Copyright (c) 2025 by Mingxin Zhang, All Rights Reserved. 
 '''
 import os
@@ -99,7 +99,7 @@ if __name__ == "__main__":
                 bos_token_id=tokenizer.bos_token_id,
                 eos_token_id=tokenizer.eos_token_id,
                 max_new_tokens=512,
-                do_sample=False,
+                do_sample=True,
                 use_cache=True,
             )
             

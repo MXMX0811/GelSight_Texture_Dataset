@@ -2,7 +2,7 @@
 Author: Mingxin Zhang m.zhang@hapis.k.u-tokyo.ac.jp
 Date: 2025-08-26 03:33:21
 LastEditors: Mingxin Zhang
-LastEditTime: 2025-09-10 06:32:41
+LastEditTime: 2025-09-11 01:37:15
 Copyright (c) 2025 by Mingxin Zhang, All Rights Reserved. 
 '''
 import os
@@ -82,7 +82,7 @@ if __name__ == "__main__":
                                            max_new_tokens = 8192,
                                            temperature = 0.01,
                                            repetition_penalty = 1,
-                                           do_sample = 1
+                                           do_sample = True
                                            )
             
             prompts[str(texture_name)][str(model_name)][str(i+1)] = response
