@@ -5,6 +5,7 @@ import os
 import re
 import pickle
 from gsrobotics.examples import gsdevice, gs3drecon
+from find_window import find_window
 
 
 # def find_window(frame, threshold, tolerance = 80):
@@ -42,81 +43,6 @@ from gsrobotics.examples import gsdevice, gs3drecon
 
 import cv2
 import numpy as np
-
-def find_window(frame):
-    """
-    使用轮廓树检测窗口范围（替代原先颜色阈值法）
-    :param frame: 输入彩色帧
-    :return: 窗口的 (x, y, w, h)
-    """
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    H, W = gray.shape[:2]
-
-    # 1) 预处理
-    blur = cv2.GaussianBlur(gray, (5, 5), 0)
-    bin_ = cv2.adaptiveThreshold(
-        blur, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
-        cv2.THRESH_BINARY, 31, 5
-    )
-
-    # 2) 闭运算连通边界
-    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (5, 5))
-    bin_ = cv2.morphologyEx(bin_, cv2.MORPH_CLOSE, kernel, iterations=2)
-
-    # 3) 查找轮廓树
-    cnts, hier = cv2.findContours(bin_, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    if hier is None or len(cnts) == 0:
-        return 0, 0, W, H
-    hier = hier[0]
-
-    def approx_quad(c):
-        peri = cv2.arcLength(c, True)
-        return cv2.approxPolyDP(c, 0.02 * peri, True)
-
-    outer_idx = -1
-    inner_idx = -1
-
-    # 4) 寻找外框（面积较大且不贴边的四边形）
-    for i, (c, h) in enumerate(zip(cnts, hier)):
-        a = cv2.contourArea(c)
-        if a < 0.2 * H * W or a > 0.95 * H * W:
-            continue
-        ap = approx_quad(c)
-        if len(ap) == 4:
-            x, y, w, hb = cv2.boundingRect(ap)
-            margin = min(x, y, W - (x + w), H - (y + hb))
-            if margin > 0.02 * max(W, H):
-                outer_idx = i
-                break
-
-    # 5) 在外框的子轮廓中寻找内框
-    if outer_idx != -1:
-        child = hier[outer_idx][2]  # 第一个子轮廓
-        best = (-1, -1)
-        while child != -1:
-            c = cnts[child]
-            ap = approx_quad(c)
-            if len(ap) == 4:
-                a_in = cv2.contourArea(ap)
-                a_out = cv2.contourArea(cnts[outer_idx])
-                ratio = a_in / a_out
-                if 0.2 < ratio < 0.95:
-                    x, y, w, hb = cv2.boundingRect(ap)
-                    rect_area = w * hb
-                    rectangularity = a_in / (rect_area + 1e-6)
-                    score = rectangularity
-                    if score > best[0]:
-                        best = (score, child)
-            child = hier[child][0]
-        inner_idx = best[1]
-
-    # 6) 返回内框的矩形范围
-    if inner_idx == -1:
-        # 如果没找到，退化为整图
-        return 0, 0, W, H
-
-    x, y, w, h = cv2.boundingRect(cnts[inner_idx])
-    return x, y, w, h
 
 
 def main(argv):
@@ -179,7 +105,7 @@ def main(argv):
     vis3d = gs3drecon.Visualize3D(dev.imgh, dev.imgw, '', mmpp)
     
     # texture_path = input('Input the texture label: ')
-    texture_path = 'Mat'
+    texture_path = 'BalconyShade'
     texture_path = 'Texture/' + texture_path
     if not os.path.exists(texture_path):
         os.makedirs(texture_path)
@@ -209,32 +135,21 @@ def main(argv):
             
             H, W, _ = rgb_frame.shape
             # 图像中心坐标
-            center_y = H // 2
-            center_x = W // 2
 
-            # 获取中心 4x4 区域的起止坐标
-            start_y = center_y - 3
-            end_y = center_y + 3
-            start_x = center_x - 3
-            end_x = center_x + 3
-
-            # 提取中心 4x4 区域的像素块
-            center_patch = rgb_frame[start_y:end_y, start_x:end_x]  # 形状为 (6, 6, 3)
-
-            # 计算平均 RGB 值
-            # mean_rgb = center_patch.mean(axis=(0, 1))  # 形状为 (3,)
-            # crop_x, crop_y, crop_w, crop_h = find_window(rgb_frame, mean_rgb, 10)
-            crop_x, crop_y, crop_w, crop_h = find_window(rgb_frame)
+            (crop_x, crop_y, crop_w, crop_h), _, _ = find_window(rgb_frame)
+            # print(f"crop x:{crop_x}, y:{crop_y}, w:{crop_w}, h:{crop_h}")
             if crop_w == 0 or crop_h  == 0:
                 continue
-            crop_w = int(crop_h / 3 * 4)
+            # crop_w = int(crop_h / 3 * 4)
             cropped_frame = rgb_frame[crop_y:crop_y+crop_h, crop_x:crop_x+crop_w]
-
-            # 调整分辨率到 320x240
-            resized_frame = cv2.resize(cropped_frame, (320, 240))
             
-            # 显示实时画面
-            cv2.imshow('Cropped RGB', resized_frame)
+            # 新：在完整帧上画出窗口矩形
+            x, y, w, h = crop_x, crop_y, crop_w, crop_h
+            vis = rgb_frame.copy()
+            cv2.rectangle(vis, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            cv2.putText(vis, f"ROI: ({x},{y},{w},{h})", (x, max(0, y - 8)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1, cv2.LINE_AA)
+            cv2.imshow("Frame + Window ROI", vis)
 
             # get the roi image
             f1 = dev.get_image()
