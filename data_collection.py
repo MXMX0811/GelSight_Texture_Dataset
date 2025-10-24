@@ -105,7 +105,7 @@ def main(argv):
     vis3d = gs3drecon.Visualize3D(dev.imgh, dev.imgw, '', mmpp)
     
     # texture_path = input('Input the texture label: ')
-    texture_path = 'BalconyShade'
+    texture_path = 'AluminumFoamInsulation'
     texture_path = 'Texture/' + texture_path
     if not os.path.exists(texture_path):
         os.makedirs(texture_path)
@@ -142,6 +142,7 @@ def main(argv):
                 continue
             # crop_w = int(crop_h / 3 * 4)
             cropped_frame = rgb_frame[crop_y:crop_y+crop_h, crop_x:crop_x+crop_w]
+            cv2.imshow("Cropped RGB", cropped_frame)
             
             # 新：在完整帧上画出窗口矩形
             x, y, w, h = crop_x, crop_y, crop_w, crop_h
