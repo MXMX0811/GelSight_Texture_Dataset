@@ -105,7 +105,7 @@ def main(argv):
     vis3d = gs3drecon.Visualize3D(dev.imgh, dev.imgw, '', mmpp)
     
     # texture_path = input('Input the texture label: ')
-    texture_path = 'Canvas'
+    texture_path = 'SyntheticLeather' 
     texture_path = 'Texture/' + texture_path
     if not os.path.exists(texture_path):
         os.makedirs(texture_path)
