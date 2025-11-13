@@ -106,7 +106,7 @@ def main(argv):
     
     # texture_path = input('Input the texture label: ')
     texture_path = 'RubberPlate3' 
-    texture_path = 'Texture/' + texture_path
+    texture_path = '../Texture/' + texture_path
     if not os.path.exists(texture_path):
         os.makedirs(texture_path)
         print(f"Make the dir: {path}")
