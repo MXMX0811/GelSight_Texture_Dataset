@@ -1,19 +1,19 @@
 import cv2, numpy as np
 
-# ===================== 内部状态 =====================
+# ===================== 内部状态（跨帧记忆） =====================
 _MARKER_STATE = {
-    "prev_corners": None,
-    "prev_roi": None
+    "prev_corners": None,  # 上一帧4角（tl,tr,br,bl），float32, shape=(4,2)
+    "prev_roi": None       # 上一帧ROI (x,y,w,h)
 }
 
 # ===================== 工具函数 =====================
 def _order_tl_tr_br_bl(pts):
     s = pts.sum(axis=1); d = np.diff(pts, axis=1)
     out = np.zeros((4,2), np.float32)
-    out[0] = pts[np.argmin(s)]
-    out[2] = pts[np.argmax(s)]
-    out[1] = pts[np.argmin(d)]
-    out[3] = pts[np.argmax(d)]
+    out[0] = pts[np.argmin(s)]  # tl
+    out[2] = pts[np.argmax(s)]  # br
+    out[1] = pts[np.argmin(d)]  # tr
+    out[3] = pts[np.argmax(d)]  # bl
     return out
 
 def _warp_by_corners(img, corners):
@@ -41,19 +41,19 @@ def _iou_rect(a, b):
     return inter/union
 
 def _shrink_corners(corners, ratio=0.015):
-    if ratio <= 0:
-        return corners.copy()
+    """将四个角点向多边形中心缩进 ratio（1~2% 推荐）"""
+    if ratio <= 0: return corners.copy()
     ctr = corners.mean(axis=0, keepdims=True)
     return (ctr + (corners - ctr) * (1.0 - float(ratio))).astype(np.float32)
 
-# ===================== 标记检测 =====================
-def _detect_inner_corners_from_markers(frame,
-                                       min_area_ratio=0.0005,
-                                       max_area_ratio=0.05):
+# ===================== 基础检测：白色标记 → 内侧角点 =====================
+def _detect_inner_corners_from_markers(frame):
+    """返回 (4,2) 内侧角点（tl,tr,br,bl）；失败返回 None"""
     H, W = frame.shape[:2]
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     gray = cv2.normalize(gray, None, 0, 255, cv2.NORM_MINMAX)
 
+    # 提取白色标记
     _, th = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
     th = cv2.morphologyEx(th, cv2.MORPH_OPEN, np.ones((3,3), np.uint8), 1)
     th = cv2.morphologyEx(th, cv2.MORPH_CLOSE, np.ones((3,3), np.uint8), 2)
@@ -62,25 +62,14 @@ def _detect_inner_corners_from_markers(frame,
     if len(cnts) < 4:
         return None
 
-    img_area = float(H * W)
-    # 只保留尺寸在合理范围内的轮廓
-    cnts = [
-        c for c in cnts
-        if (min_area_ratio * img_area <= cv2.contourArea(c) <= max_area_ratio * img_area)
-    ]
-    if len(cnts) < 4:
-        return None
-
-    # 从中选距离图像中心最远的4个
-    centers = np.array(
-        [np.mean(c.reshape(-1,2), axis=0) for c in cnts],
-        dtype=np.float32
-    )
+    # 取面积Top10里离中心最远的4个
+    cnts = sorted(cnts, key=cv2.contourArea, reverse=True)[:10]
+    centers = np.array([np.mean(c.reshape(-1,2), axis=0) for c in cnts], dtype=np.float32)
     img_ctr = np.array([W/2, H/2], dtype=np.float32)
     idxs = np.argsort(-np.linalg.norm(centers - img_ctr, axis=1))[:4]
     selected_cnts = [cnts[i] for i in idxs]
 
-    # 每个标记取 minAreaRect 顶点，然后选离“标记中心均值”最近的顶点 = 内侧角点
+    # 每个标记取 minAreaRect 顶点，然后选离“标记中心均值”最近的顶点=内侧角点
     boxes   = [cv2.boxPoints(cv2.minAreaRect(c)).astype(np.float32) for c in selected_cnts]
     mcenters= np.array([b.mean(axis=0) for b in boxes], dtype=np.float32)
     win_ctr = mcenters.mean(axis=0)
@@ -92,38 +81,53 @@ def _detect_inner_corners_from_markers(frame,
 
     return _order_tl_tr_br_bl(inner)
 
-# ===================== 主流程 =====================
+# ===================== 稳定版 API =====================
 def find_window(
     frame,
-    alpha=0.8,
-    min_iou=0.25,
-    max_jump=40.0,
-    shrink_ratio=0.01,
-    enforce_aspect=None,
-    min_window_ratio=0.15
+    alpha=0.8,           # EMA平滑系数（越大越稳）
+    min_iou=0.25,         # 当前与上一帧ROI的最小IoU，低于则判为异常
+    max_jump=40.0,        # 单帧允许的角点平均位移（像素）
+    shrink_ratio=0.01,   # 结果向内收缩比例（推荐 0.01~0.02）
+    enforce_aspect=None   # 如 (4,3)，需要时再加
 ):
+    """
+    返回: (roi, corners, warp)
+    - corners: 稳定后的4角点（tl,tr,br,bl）
+    - warp: 透视矫正图，一定非空
+    """
     H, W = frame.shape[:2]
     full_corners = np.array([[0,0],[W-1,0],[W-1,H-1],[0,H-1]], np.float32)
 
+    # 1) 基础检测
     cur = _detect_inner_corners_from_markers(frame)
+
+    # 2) 失败 → 回退
     if cur is None:
         cur = _MARKER_STATE["prev_corners"] if _MARKER_STATE["prev_corners"] is not None else full_corners
 
+    # 3) 若有上一帧 → 一致性判定 + 指数平滑
     prev = _MARKER_STATE["prev_corners"]
     if prev is not None:
+        # 几何一致性：IoU + 平均位移
         cur_roi  = _rect_from_corners(cur)
         prev_roi = _rect_from_corners(prev)
         iou = _iou_rect(cur_roi, prev_roi)
         mean_jump = float(np.linalg.norm((cur - prev), axis=1).mean())
+
         if iou < min_iou and mean_jump > max_jump:
+            # 异常帧，直接沿用上一帧
             cur = prev.copy()
         else:
+            # 指数平滑
             cur = (alpha * prev + (1.0 - alpha) * cur).astype(np.float32)
 
+    # 4) 向内收缩
     cur = _shrink_corners(cur, ratio=shrink_ratio)
 
+    # 5) 可选：强制宽高比（只收不放，防止越界）
     if enforce_aspect is not None:
         aw, ah = enforce_aspect
+        # 以当前四角的包围矩形为基，收缩到目标比例
         x,y,w,h = _rect_from_corners(cur)
         tw = int(round(h * aw / ah))
         th = int(round(w * ah / aw))
@@ -135,19 +139,17 @@ def find_window(
         w = max(1, min(w, W-x)); h = max(1, min(h, H-y))
         cur = np.array([[x,y],[x+w,y],[x+w,y+h],[x,y+h]], np.float32)
 
-    x,y,w,h = _rect_from_corners(cur)
-    if (w < W * float(min_window_ratio)) or (h < H * float(min_window_ratio)):
-        cur = full_corners.copy()
-        x, y, w, h = 0, 0, W, H
-
-    roi  = (int(x), int(y), int(w), int(h))
+    # 6) 生成输出
+    roi  = tuple(_rect_from_corners(cur))
     warp = _warp_by_corners(frame, cur)
 
+    # 7) 更新状态
     _MARKER_STATE["prev_corners"] = cur.copy()
     _MARKER_STATE["prev_roi"]     = np.array(roi, dtype=np.float32)
 
     return roi, cur, warp
 
 def reset_marker_tracker():
+    """需要时手动清空平滑状态（比如摄像头重启或场景切换）"""
     _MARKER_STATE["prev_corners"] = None
     _MARKER_STATE["prev_roi"] = None
