@@ -1,4 +1,5 @@
 *.ckpt
+__pycache__
 visualization.ipynb
 MiniCPMv2_6-prompt-generator
 Qwen-VL-Chat
