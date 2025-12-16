@@ -1,0 +1,460 @@
+image_file,audio_file,final_prompt
+AluminumMesh\14.jpg,AluminumMesh\AluminumMesh_finger_fast.wav,The sound of a finger rubbing on AluminumMesh at a fast speed.
+AluminumMesh\12.jpg,AluminumMesh\AluminumMesh_finger_middle.wav,The sound of a finger rubbing on AluminumMesh at a medium speed.
+AluminumMesh\13.jpg,AluminumMesh\AluminumMesh_finger_slow.wav,The sound of a finger rubbing on AluminumMesh at a slow speed.
+AluminumMesh\8.jpg,AluminumMesh\AluminumMesh_nail_fast.wav,The sound of a nail rubbing on AluminumMesh at a fast speed.
+AluminumMesh\14.jpg,AluminumMesh\AluminumMesh_nail_middle.wav,The sound of a nail rubbing on AluminumMesh at a medium speed.
+AluminumMesh\14.jpg,AluminumMesh\AluminumMesh_nail_slow.wav,The sound of a nail rubbing on AluminumMesh at a slow speed.
+AluminumMesh\1.jpg,AluminumMesh\AluminumMesh_stick_fast.wav,The sound of a plastic stick rubbing on AluminumMesh at a fast speed.
+AluminumMesh\17.jpg,AluminumMesh\AluminumMesh_stick_middle.wav,The sound of a plastic stick rubbing on AluminumMesh at a medium speed.
+AluminumMesh\10.jpg,AluminumMesh\AluminumMesh_stick_slow.wav,The sound of a plastic stick rubbing on AluminumMesh at a slow speed.
+AluminumPunching1\6.jpg,AluminumPunching1\AluminumPunching1_finger_fast.wav,The sound of a finger rubbing on AluminumPunching at a fast speed.
+AluminumPunching1\3.jpg,AluminumPunching1\AluminumPunching1_finger_middle.wav,The sound of a finger rubbing on AluminumPunching at a medium speed.
+AluminumPunching1\5.jpg,AluminumPunching1\AluminumPunching1_finger_slow.wav,The sound of a finger rubbing on AluminumPunching at a slow speed.
+AluminumPunching1\13.jpg,AluminumPunching1\AluminumPunching1_nail_fast.wav,The sound of a nail rubbing on AluminumPunching at a fast speed.
+AluminumPunching1\4.jpg,AluminumPunching1\AluminumPunching1_nail_middle.wav,The sound of a nail rubbing on AluminumPunching at a medium speed.
+AluminumPunching1\9.jpg,AluminumPunching1\AluminumPunching1_nail_slow.wav,The sound of a nail rubbing on AluminumPunching at a slow speed.
+AluminumPunching1\10.jpg,AluminumPunching1\AluminumPunching1_stick_fast.wav,The sound of a plastic stick rubbing on AluminumPunching at a fast speed.
+AluminumPunching1\2.jpg,AluminumPunching1\AluminumPunching1_stick_middle.wav,The sound of a plastic stick rubbing on AluminumPunching at a medium speed.
+AluminumPunching1\4.jpg,AluminumPunching1\AluminumPunching1_stick_slow.wav,The sound of a plastic stick rubbing on AluminumPunching at a slow speed.
+AluminumPunching2\2.jpg,AluminumPunching2\AluminumPunching2_finger_fast.wav,The sound of a finger rubbing on AluminumPunching at a fast speed.
+AluminumPunching2\11.jpg,AluminumPunching2\AluminumPunching2_finger_middle.wav,The sound of a finger rubbing on AluminumPunching at a medium speed.
+AluminumPunching2\1.jpg,AluminumPunching2\AluminumPunching2_finger_slow.wav,The sound of a finger rubbing on AluminumPunching at a slow speed.
+AluminumPunching2\18.jpg,AluminumPunching2\AluminumPunching2_nail_fast.wav,The sound of a nail rubbing on AluminumPunching at a fast speed.
+AluminumPunching2\1.jpg,AluminumPunching2\AluminumPunching2_nail_middle.wav,The sound of a nail rubbing on AluminumPunching at a medium speed.
+AluminumPunching2\3.jpg,AluminumPunching2\AluminumPunching2_nail_slow.wav,The sound of a nail rubbing on AluminumPunching at a slow speed.
+AluminumPunching2\10.jpg,AluminumPunching2\AluminumPunching2_stick_fast.wav,The sound of a plastic stick rubbing on AluminumPunching at a fast speed.
+AluminumPunching2\17.jpg,AluminumPunching2\AluminumPunching2_stick_middle.wav,The sound of a plastic stick rubbing on AluminumPunching at a medium speed.
+AluminumPunching2\4.jpg,AluminumPunching2\AluminumPunching2_stick_slow.wav,The sound of a plastic stick rubbing on AluminumPunching at a slow speed.
+AluminumPunching3\6.jpg,AluminumPunching3\AluminumPunching3_finger_fast.wav,The sound of a finger rubbing on AluminumPunching at a fast speed.
+AluminumPunching3\18.jpg,AluminumPunching3\AluminumPunching3_finger_middle.wav,The sound of a finger rubbing on AluminumPunching at a medium speed.
+AluminumPunching3\7.jpg,AluminumPunching3\AluminumPunching3_finger_slow.wav,The sound of a finger rubbing on AluminumPunching at a slow speed.
+AluminumPunching3\15.jpg,AluminumPunching3\AluminumPunching3_nail_fast.wav,The sound of a nail rubbing on AluminumPunching at a fast speed.
+AluminumPunching3\7.jpg,AluminumPunching3\AluminumPunching3_nail_middle.wav,The sound of a nail rubbing on AluminumPunching at a medium speed.
+AluminumPunching3\10.jpg,AluminumPunching3\AluminumPunching3_nail_slow.wav,The sound of a nail rubbing on AluminumPunching at a slow speed.
+AluminumPunching3\15.jpg,AluminumPunching3\AluminumPunching3_stick_fast.wav,The sound of a plastic stick rubbing on AluminumPunching at a fast speed.
+AluminumPunching3\16.jpg,AluminumPunching3\AluminumPunching3_stick_middle.wav,The sound of a plastic stick rubbing on AluminumPunching at a medium speed.
+AluminumPunching3\20.jpg,AluminumPunching3\AluminumPunching3_stick_slow.wav,The sound of a plastic stick rubbing on AluminumPunching at a slow speed.
+ArtificialGrass1\5.jpg,ArtificialGrass1\ArtificialGrass1_finger_fast.wav,The sound of a finger rubbing on ArtificialGrass at a fast speed.
+ArtificialGrass1\7.jpg,ArtificialGrass1\ArtificialGrass1_finger_middle.wav,The sound of a finger rubbing on ArtificialGrass at a medium speed.
+ArtificialGrass1\6.jpg,ArtificialGrass1\ArtificialGrass1_finger_slow.wav,The sound of a finger rubbing on ArtificialGrass at a slow speed.
+ArtificialGrass1\5.jpg,ArtificialGrass1\ArtificialGrass1_nail_fast.wav,The sound of a nail rubbing on ArtificialGrass at a fast speed.
+ArtificialGrass1\4.jpg,ArtificialGrass1\ArtificialGrass1_nail_middle.wav,The sound of a nail rubbing on ArtificialGrass at a medium speed.
+ArtificialGrass1\15.jpg,ArtificialGrass1\ArtificialGrass1_nail_slow.wav,The sound of a nail rubbing on ArtificialGrass at a slow speed.
+ArtificialGrass1\11.jpg,ArtificialGrass1\ArtificialGrass1_stick_fast.wav,The sound of a plastic stick rubbing on ArtificialGrass at a fast speed.
+ArtificialGrass1\7.jpg,ArtificialGrass1\ArtificialGrass1_stick_middle.wav,The sound of a plastic stick rubbing on ArtificialGrass at a medium speed.
+ArtificialGrass1\3.jpg,ArtificialGrass1\ArtificialGrass1_stick_slow.wav,The sound of a plastic stick rubbing on ArtificialGrass at a slow speed.
+ArtificialGrass2\2.jpg,ArtificialGrass2\ArtificialGrass2_finger_fast.wav,The sound of a finger rubbing on ArtificialGrass at a fast speed.
+ArtificialGrass2\18.jpg,ArtificialGrass2\ArtificialGrass2_finger_middle.wav,The sound of a finger rubbing on ArtificialGrass at a medium speed.
+ArtificialGrass2\4.jpg,ArtificialGrass2\ArtificialGrass2_finger_slow.wav,The sound of a finger rubbing on ArtificialGrass at a slow speed.
+ArtificialGrass2\1.jpg,ArtificialGrass2\ArtificialGrass2_nail_fast.wav,The sound of a nail rubbing on ArtificialGrass at a fast speed.
+ArtificialGrass2\15.jpg,ArtificialGrass2\ArtificialGrass2_nail_middle.wav,The sound of a nail rubbing on ArtificialGrass at a medium speed.
+ArtificialGrass2\19.jpg,ArtificialGrass2\ArtificialGrass2_nail_slow.wav,The sound of a nail rubbing on ArtificialGrass at a slow speed.
+ArtificialGrass2\8.jpg,ArtificialGrass2\ArtificialGrass2_stick_fast.wav,The sound of a plastic stick rubbing on ArtificialGrass at a fast speed.
+ArtificialGrass2\17.jpg,ArtificialGrass2\ArtificialGrass2_stick_middle.wav,The sound of a plastic stick rubbing on ArtificialGrass at a medium speed.
+ArtificialGrass2\15.jpg,ArtificialGrass2\ArtificialGrass2_stick_slow.wav,The sound of a plastic stick rubbing on ArtificialGrass at a slow speed.
+Basket\7.jpg,Basket\Basket_finger_fast.wav,The sound of a finger rubbing on Basket at a fast speed.
+Basket\12.jpg,Basket\Basket_finger_middle.wav,The sound of a finger rubbing on Basket at a medium speed.
+Basket\15.jpg,Basket\Basket_finger_slow.wav,The sound of a finger rubbing on Basket at a slow speed.
+Basket\12.jpg,Basket\Basket_nail_fast.wav,The sound of a nail rubbing on Basket at a fast speed.
+Basket\16.jpg,Basket\Basket_nail_middle.wav,The sound of a nail rubbing on Basket at a medium speed.
+Basket\17.jpg,Basket\Basket_nail_slow.wav,The sound of a nail rubbing on Basket at a slow speed.
+Basket\17.jpg,Basket\Basket_stick_fast.wav,The sound of a plastic stick rubbing on Basket at a fast speed.
+Basket\11.jpg,Basket\Basket_stick_middle.wav,The sound of a plastic stick rubbing on Basket at a medium speed.
+Basket\13.jpg,Basket\Basket_stick_slow.wav,The sound of a plastic stick rubbing on Basket at a slow speed.
+Brush\2.jpg,Brush\Brush_finger_fast.wav,The sound of a finger rubbing on Brush at a fast speed.
+Brush\5.jpg,Brush\Brush_finger_middle.wav,The sound of a finger rubbing on Brush at a medium speed.
+Brush\13.jpg,Brush\Brush_finger_slow.wav,The sound of a finger rubbing on Brush at a slow speed.
+Brush\14.jpg,Brush\Brush_nail_fast.wav,The sound of a nail rubbing on Brush at a fast speed.
+Brush\2.jpg,Brush\Brush_nail_middle.wav,The sound of a nail rubbing on Brush at a medium speed.
+Brush\3.jpg,Brush\Brush_nail_slow.wav,The sound of a nail rubbing on Brush at a slow speed.
+Brush\11.jpg,Brush\Brush_stick_fast.wav,The sound of a plastic stick rubbing on Brush at a fast speed.
+Brush\4.jpg,Brush\Brush_stick_middle.wav,The sound of a plastic stick rubbing on Brush at a medium speed.
+Brush\16.jpg,Brush\Brush_stick_slow.wav,The sound of a plastic stick rubbing on Brush at a slow speed.
+Carpet\10.jpg,Carpet\Carpet_finger_fast.wav,The sound of a finger rubbing on Carpet at a fast speed.
+Carpet\5.jpg,Carpet\Carpet_finger_middle.wav,The sound of a finger rubbing on Carpet at a medium speed.
+Carpet\4.jpg,Carpet\Carpet_finger_slow.wav,The sound of a finger rubbing on Carpet at a slow speed.
+Carpet\19.jpg,Carpet\Carpet_nail_fast.wav,The sound of a nail rubbing on Carpet at a fast speed.
+Carpet\7.jpg,Carpet\Carpet_nail_middle.wav,The sound of a nail rubbing on Carpet at a medium speed.
+Carpet\7.jpg,Carpet\Carpet_nail_slow.wav,The sound of a nail rubbing on Carpet at a slow speed.
+Carpet\2.jpg,Carpet\Carpet_stick_fast.wav,The sound of a plastic stick rubbing on Carpet at a fast speed.
+Carpet\1.jpg,Carpet\Carpet_stick_middle.wav,The sound of a plastic stick rubbing on Carpet at a medium speed.
+Carpet\17.jpg,Carpet\Carpet_stick_slow.wav,The sound of a plastic stick rubbing on Carpet at a slow speed.
+Coin\18.jpg,Coin\Coin_finger_fast.wav,The sound of a finger rubbing on Coin at a fast speed.
+Coin\3.jpg,Coin\Coin_finger_middle.wav,The sound of a finger rubbing on Coin at a medium speed.
+Coin\2.jpg,Coin\Coin_finger_slow.wav,The sound of a finger rubbing on Coin at a slow speed.
+Coin\12.jpg,Coin\Coin_nail_fast.wav,The sound of a nail rubbing on Coin at a fast speed.
+Coin\8.jpg,Coin\Coin_nail_middle.wav,The sound of a nail rubbing on Coin at a medium speed.
+Coin\18.jpg,Coin\Coin_nail_slow.wav,The sound of a nail rubbing on Coin at a slow speed.
+Coin\15.jpg,Coin\Coin_stick_fast.wav,The sound of a plastic stick rubbing on Coin at a fast speed.
+Coin\5.jpg,Coin\Coin_stick_middle.wav,The sound of a plastic stick rubbing on Coin at a medium speed.
+Coin\4.jpg,Coin\Coin_stick_slow.wav,The sound of a plastic stick rubbing on Coin at a slow speed.
+Concrete\6.jpg,Concrete\Concrete_finger_fast.wav,The sound of a finger rubbing on Concrete at a fast speed.
+Concrete\19.jpg,Concrete\Concrete_finger_middle.wav,The sound of a finger rubbing on Concrete at a medium speed.
+Concrete\9.jpg,Concrete\Concrete_finger_slow.wav,The sound of a finger rubbing on Concrete at a slow speed.
+Concrete\4.jpg,Concrete\Concrete_nail_fast.wav,The sound of a nail rubbing on Concrete at a fast speed.
+Concrete\11.jpg,Concrete\Concrete_nail_middle.wav,The sound of a nail rubbing on Concrete at a medium speed.
+Concrete\15.jpg,Concrete\Concrete_nail_slow.wav,The sound of a nail rubbing on Concrete at a slow speed.
+Concrete\9.jpg,Concrete\Concrete_stick_fast.wav,The sound of a plastic stick rubbing on Concrete at a fast speed.
+Concrete\4.jpg,Concrete\Concrete_stick_middle.wav,The sound of a plastic stick rubbing on Concrete at a medium speed.
+Concrete\16.jpg,Concrete\Concrete_stick_slow.wav,The sound of a plastic stick rubbing on Concrete at a slow speed.
+CopperMesh1\8.jpg,CopperMesh1\CopperMesh1_finger_fast.wav,The sound of a finger rubbing on CopperMesh at a fast speed.
+CopperMesh1\10.jpg,CopperMesh1\CopperMesh1_finger_middle.wav,The sound of a finger rubbing on CopperMesh at a medium speed.
+CopperMesh1\8.jpg,CopperMesh1\CopperMesh1_finger_slow.wav,The sound of a finger rubbing on CopperMesh at a slow speed.
+CopperMesh1\13.jpg,CopperMesh1\CopperMesh1_nail_fast.wav,The sound of a nail rubbing on CopperMesh at a fast speed.
+CopperMesh1\8.jpg,CopperMesh1\CopperMesh1_nail_middle.wav,The sound of a nail rubbing on CopperMesh at a medium speed.
+CopperMesh1\18.jpg,CopperMesh1\CopperMesh1_nail_slow.wav,The sound of a nail rubbing on CopperMesh at a slow speed.
+CopperMesh1\12.jpg,CopperMesh1\CopperMesh1_stick_fast.wav,The sound of a plastic stick rubbing on CopperMesh at a fast speed.
+CopperMesh1\1.jpg,CopperMesh1\CopperMesh1_stick_middle.wav,The sound of a plastic stick rubbing on CopperMesh at a medium speed.
+CopperMesh1\16.jpg,CopperMesh1\CopperMesh1_stick_slow.wav,The sound of a plastic stick rubbing on CopperMesh at a slow speed.
+CopperMesh2\11.jpg,CopperMesh2\CopperMesh2_finger_fast.wav,The sound of a finger rubbing on CopperMesh at a fast speed.
+CopperMesh2\13.jpg,CopperMesh2\CopperMesh2_finger_middle.wav,The sound of a finger rubbing on CopperMesh at a medium speed.
+CopperMesh2\12.jpg,CopperMesh2\CopperMesh2_finger_slow.wav,The sound of a finger rubbing on CopperMesh at a slow speed.
+CopperMesh2\7.jpg,CopperMesh2\CopperMesh2_nail_fast.wav,The sound of a nail rubbing on CopperMesh at a fast speed.
+CopperMesh2\9.jpg,CopperMesh2\CopperMesh2_nail_middle.wav,The sound of a nail rubbing on CopperMesh at a medium speed.
+CopperMesh2\11.jpg,CopperMesh2\CopperMesh2_nail_slow.wav,The sound of a nail rubbing on CopperMesh at a slow speed.
+CopperMesh2\11.jpg,CopperMesh2\CopperMesh2_stick_fast.wav,The sound of a plastic stick rubbing on CopperMesh at a fast speed.
+CopperMesh2\15.jpg,CopperMesh2\CopperMesh2_stick_middle.wav,The sound of a plastic stick rubbing on CopperMesh at a medium speed.
+CopperMesh2\15.jpg,CopperMesh2\CopperMesh2_stick_slow.wav,The sound of a plastic stick rubbing on CopperMesh at a slow speed.
+Curtain\17.jpg,Curtain\Curtain_finger_fast.wav,The sound of a finger rubbing on Curtain at a fast speed.
+Curtain\1.jpg,Curtain\Curtain_finger_middle.wav,The sound of a finger rubbing on Curtain at a medium speed.
+Curtain\3.jpg,Curtain\Curtain_finger_slow.wav,The sound of a finger rubbing on Curtain at a slow speed.
+Curtain\19.jpg,Curtain\Curtain_nail_fast.wav,The sound of a nail rubbing on Curtain at a fast speed.
+Curtain\19.jpg,Curtain\Curtain_nail_middle.wav,The sound of a nail rubbing on Curtain at a medium speed.
+Curtain\19.jpg,Curtain\Curtain_nail_slow.wav,The sound of a nail rubbing on Curtain at a slow speed.
+Curtain\9.jpg,Curtain\Curtain_stick_fast.wav,The sound of a plastic stick rubbing on Curtain at a fast speed.
+Curtain\9.jpg,Curtain\Curtain_stick_middle.wav,The sound of a plastic stick rubbing on Curtain at a medium speed.
+Curtain\13.jpg,Curtain\Curtain_stick_slow.wav,The sound of a plastic stick rubbing on Curtain at a slow speed.
+Cushion\17.jpg,Cushion\Cushion_finger_fast.wav,The sound of a finger rubbing on Cushion at a fast speed.
+Cushion\1.jpg,Cushion\Cushion_finger_middle.wav,The sound of a finger rubbing on Cushion at a medium speed.
+Cushion\16.jpg,Cushion\Cushion_finger_slow.wav,The sound of a finger rubbing on Cushion at a slow speed.
+Cushion\8.jpg,Cushion\Cushion_nail_fast.wav,The sound of a nail rubbing on Cushion at a fast speed.
+Cushion\11.jpg,Cushion\Cushion_nail_middle.wav,The sound of a nail rubbing on Cushion at a medium speed.
+Cushion\3.jpg,Cushion\Cushion_nail_slow.wav,The sound of a nail rubbing on Cushion at a slow speed.
+Cushion\4.jpg,Cushion\Cushion_stick_fast.wav,The sound of a plastic stick rubbing on Cushion at a fast speed.
+Cushion\6.jpg,Cushion\Cushion_stick_middle.wav,The sound of a plastic stick rubbing on Cushion at a medium speed.
+Cushion\18.jpg,Cushion\Cushion_stick_slow.wav,The sound of a plastic stick rubbing on Cushion at a slow speed.
+CushionCover\13.jpg,CushionCover\CushionCover_finger_fast.wav,The sound of a finger rubbing on CushionCover at a fast speed.
+CushionCover\17.jpg,CushionCover\CushionCover_finger_middle.wav,The sound of a finger rubbing on CushionCover at a medium speed.
+CushionCover\5.jpg,CushionCover\CushionCover_finger_slow.wav,The sound of a finger rubbing on CushionCover at a slow speed.
+CushionCover\14.jpg,CushionCover\CushionCover_nail_fast.wav,The sound of a nail rubbing on CushionCover at a fast speed.
+CushionCover\7.jpg,CushionCover\CushionCover_nail_middle.wav,The sound of a nail rubbing on CushionCover at a medium speed.
+CushionCover\15.jpg,CushionCover\CushionCover_nail_slow.wav,The sound of a nail rubbing on CushionCover at a slow speed.
+CushionCover\18.jpg,CushionCover\CushionCover_stick_fast.wav,The sound of a plastic stick rubbing on CushionCover at a fast speed.
+CushionCover\14.jpg,CushionCover\CushionCover_stick_middle.wav,The sound of a plastic stick rubbing on CushionCover at a medium speed.
+CushionCover\13.jpg,CushionCover\CushionCover_stick_slow.wav,The sound of a plastic stick rubbing on CushionCover at a slow speed.
+EVABoard\16.jpg,EVABoard\EvaBoard_finger_fast.wav,The sound of a finger rubbing on EVABoard at a fast speed.
+EVABoard\8.jpg,EVABoard\EvaBoard_finger_middle.wav,The sound of a finger rubbing on EVABoard at a medium speed.
+EVABoard\8.jpg,EVABoard\EvaBoard_finger_slow.wav,The sound of a finger rubbing on EVABoard at a slow speed.
+EVABoard\8.jpg,EVABoard\EvaBoard_nail_fast.wav,The sound of a nail rubbing on EVABoard at a fast speed.
+EVABoard\8.jpg,EVABoard\EvaBoard_nail_middle.wav,The sound of a nail rubbing on EVABoard at a medium speed.
+EVABoard\9.jpg,EVABoard\EvaBoard_nail_slow.wav,The sound of a nail rubbing on EVABoard at a slow speed.
+EVABoard\13.jpg,EVABoard\EvaBoard_stick_fast.wav,The sound of a plastic stick rubbing on EVABoard at a fast speed.
+EVABoard\5.jpg,EVABoard\EvaBoard_stick_middle.wav,The sound of a plastic stick rubbing on EVABoard at a medium speed.
+EVABoard\1.jpg,EVABoard\EvaBoard_stick_slow.wav,The sound of a plastic stick rubbing on EVABoard at a slow speed.
+HammertoneAluminum\10.jpg,HammertoneAluminum\HammertoneAluminum_finger_concave__fast.wav,The sound of a finger rubbing on HammertoneAluminum at a fast speed on the concave surface.
+HammertoneAluminum\7.jpg,HammertoneAluminum\HammertoneAluminum_finger_concave__middle.wav,The sound of a finger rubbing on HammertoneAluminum at a medium speed on the concave surface.
+HammertoneAluminum\5.jpg,HammertoneAluminum\HammertoneAluminum_finger_concave__slow.wav,The sound of a finger rubbing on HammertoneAluminum at a slow speed on the concave surface.
+HammertoneAluminum\3.jpg,HammertoneAluminum\HammertoneAluminum_finger_convex_fast.wav,The sound of a finger rubbing on HammertoneAluminum at a fast speed on the convex surface.
+HammertoneAluminum\10.jpg,HammertoneAluminum\HammertoneAluminum_finger_convex_middle.wav,The sound of a finger rubbing on HammertoneAluminum at a medium speed on the convex surface.
+HammertoneAluminum\9.jpg,HammertoneAluminum\HammertoneAluminum_finger_convex_slow.wav,The sound of a finger rubbing on HammertoneAluminum at a slow speed on the convex surface.
+HammertoneAluminum\18.jpg,HammertoneAluminum\HammertoneAluminum_nail_concave__fast.wav,The sound of a nail rubbing on HammertoneAluminum at a fast speed on the concave surface.
+HammertoneAluminum\15.jpg,HammertoneAluminum\HammertoneAluminum_nail_concave__middle.wav,The sound of a nail rubbing on HammertoneAluminum at a medium speed on the concave surface.
+HammertoneAluminum\9.jpg,HammertoneAluminum\HammertoneAluminum_nail_concave__slow.wav,The sound of a nail rubbing on HammertoneAluminum at a slow speed on the concave surface.
+HammertoneAluminum\20.jpg,HammertoneAluminum\HammertoneAluminum_nail_convex_fast.wav,The sound of a nail rubbing on HammertoneAluminum at a fast speed on the convex surface.
+HammertoneAluminum\4.jpg,HammertoneAluminum\HammertoneAluminum_nail_convex_middle.wav,The sound of a nail rubbing on HammertoneAluminum at a medium speed on the convex surface.
+HammertoneAluminum\8.jpg,HammertoneAluminum\HammertoneAluminum_nail_convex_slow.wav,The sound of a nail rubbing on HammertoneAluminum at a slow speed on the convex surface.
+HammertoneAluminum\14.jpg,HammertoneAluminum\HammertoneAluminum_stick_concave_fast.wav,The sound of a plastic stick rubbing on HammertoneAluminum at a fast speed on the concave surface.
+HammertoneAluminum\13.jpg,HammertoneAluminum\HammertoneAluminum_stick_concave_middle.wav,The sound of a plastic stick rubbing on HammertoneAluminum at a medium speed on the concave surface.
+HammertoneAluminum\9.jpg,HammertoneAluminum\HammertoneAluminum_stick_concave_slow.wav,The sound of a plastic stick rubbing on HammertoneAluminum at a slow speed on the concave surface.
+HammertoneAluminum\2.jpg,HammertoneAluminum\HammertoneAluminum_stick_convex_fast.wav,The sound of a plastic stick rubbing on HammertoneAluminum at a fast speed on the convex surface.
+HammertoneAluminum\17.jpg,HammertoneAluminum\HammertoneAluminum_stick_convex_middle.wav,The sound of a plastic stick rubbing on HammertoneAluminum at a medium speed on the convex surface.
+HammertoneAluminum\4.jpg,HammertoneAluminum\HammertoneAluminum_stick_convex_slow.wav,The sound of a plastic stick rubbing on HammertoneAluminum at a slow speed on the convex surface.
+HookAndLoop1\15.jpg,HookAndLoop1\Hookandloop_loop_finger_fast.wav,The sound of a finger rubbing on HookAndLoop at a fast speed.
+HookAndLoop1\7.jpg,HookAndLoop1\Hookandloop_loop_finger_middle.wav,The sound of a finger rubbing on HookAndLoop at a medium speed.
+HookAndLoop1\5.jpg,HookAndLoop1\Hookandloop_loop_finger_slow.wav,The sound of a finger rubbing on HookAndLoop at a slow speed.
+HookAndLoop1\20.jpg,HookAndLoop1\Hookandloop_loop_nail_fast.wav,The sound of a nail rubbing on HookAndLoop at a fast speed.
+HookAndLoop1\7.jpg,HookAndLoop1\Hookandloop_loop_nail_middle.wav,The sound of a nail rubbing on HookAndLoop at a medium speed.
+HookAndLoop1\10.jpg,HookAndLoop1\Hookandloop_loop_nail_slow.wav,The sound of a nail rubbing on HookAndLoop at a slow speed.
+HookAndLoop1\8.jpg,HookAndLoop1\Hookandloop_loop_stick_fast.wav,The sound of a plastic stick rubbing on HookAndLoop at a fast speed.
+HookAndLoop1\10.jpg,HookAndLoop1\Hookandloop_loop_stick_middle.wav,The sound of a plastic stick rubbing on HookAndLoop at a medium speed.
+HookAndLoop1\1.jpg,HookAndLoop1\Hookandloop_loop_stick_slow.wav,The sound of a plastic stick rubbing on HookAndLoop at a slow speed.
+HookAndLoop2\17.jpg,HookAndLoop2\Hookandloop_loop_finger_fast.wav,The sound of a finger rubbing on HookAndLoop at a fast speed.
+HookAndLoop2\11.jpg,HookAndLoop2\Hookandloop_loop_finger_middle.wav,The sound of a finger rubbing on HookAndLoop at a medium speed.
+HookAndLoop2\6.jpg,HookAndLoop2\Hookandloop_loop_finger_slow.wav,The sound of a finger rubbing on HookAndLoop at a slow speed.
+HookAndLoop2\3.jpg,HookAndLoop2\Hookandloop_loop_nail_fast.wav,The sound of a nail rubbing on HookAndLoop at a fast speed.
+HookAndLoop2\20.jpg,HookAndLoop2\Hookandloop_loop_nail_middle.wav,The sound of a nail rubbing on HookAndLoop at a medium speed.
+HookAndLoop2\20.jpg,HookAndLoop2\Hookandloop_loop_nail_slow.wav,The sound of a nail rubbing on HookAndLoop at a slow speed.
+HookAndLoop2\9.jpg,HookAndLoop2\Hookandloop_loop_stick_fast.wav,The sound of a plastic stick rubbing on HookAndLoop at a fast speed.
+HookAndLoop2\17.jpg,HookAndLoop2\Hookandloop_loop_stick_middle.wav,The sound of a plastic stick rubbing on HookAndLoop at a medium speed.
+HookAndLoop2\16.jpg,HookAndLoop2\Hookandloop_loop_stick_slow.wav,The sound of a plastic stick rubbing on HookAndLoop at a slow speed.
+Jeans\4.jpg,Jeans\Jeans_finger_fast.wav,The sound of a finger rubbing on Jeans at a fast speed.
+Jeans\17.jpg,Jeans\Jeans_finger_middle.wav,The sound of a finger rubbing on Jeans at a medium speed.
+Jeans\18.jpg,Jeans\Jeans_finger_slow.wav,The sound of a finger rubbing on Jeans at a slow speed.
+Jeans\1.jpg,Jeans\Jeans_nail_fast.wav,The sound of a nail rubbing on Jeans at a fast speed.
+Jeans\8.jpg,Jeans\Jeans_nail_middle.wav,The sound of a nail rubbing on Jeans at a medium speed.
+Jeans\1.jpg,Jeans\Jeans_nail_slow.wav,The sound of a nail rubbing on Jeans at a slow speed.
+Jeans\12.jpg,Jeans\Jeans_stick_fast.wav,The sound of a plastic stick rubbing on Jeans at a fast speed.
+Jeans\17.jpg,Jeans\Jeans_stick_middle.wav,The sound of a plastic stick rubbing on Jeans at a medium speed.
+Jeans\9.jpg,Jeans\Jeans_stick_slow.wav,The sound of a plastic stick rubbing on Jeans at a slow speed.
+JuteBag\11.jpg,JuteBag\JuteBag_finger_fast.wav,The sound of a finger rubbing on JuteBag at a fast speed.
+JuteBag\20.jpg,JuteBag\JuteBag_finger_middle.wav,The sound of a finger rubbing on JuteBag at a medium speed.
+JuteBag\13.jpg,JuteBag\JuteBag_finger_slow.wav,The sound of a finger rubbing on JuteBag at a slow speed.
+JuteBag\15.jpg,JuteBag\JuteBag_nail_fast.wav,The sound of a nail rubbing on JuteBag at a fast speed.
+JuteBag\16.jpg,JuteBag\JuteBag_nail_middle.wav,The sound of a nail rubbing on JuteBag at a medium speed.
+JuteBag\17.jpg,JuteBag\JuteBag_nail_slow.wav,The sound of a nail rubbing on JuteBag at a slow speed.
+JuteBag\9.jpg,JuteBag\JuteBag_stick_fast.wav,The sound of a plastic stick rubbing on JuteBag at a fast speed.
+JuteBag\14.jpg,JuteBag\JuteBag_stick_middle.wav,The sound of a plastic stick rubbing on JuteBag at a medium speed.
+JuteBag\2.jpg,JuteBag\JuteBag_stick_slow.wav,The sound of a plastic stick rubbing on JuteBag at a slow speed.
+Leather\2.jpg,Leather\Leather_finger_fast.wav,The sound of a finger rubbing on Leather at a fast speed.
+Leather\14.jpg,Leather\Leather_finger_middle.wav,The sound of a finger rubbing on Leather at a medium speed.
+Leather\15.jpg,Leather\Leather_finger_slow.wav,The sound of a finger rubbing on Leather at a slow speed.
+Leather\9.jpg,Leather\Leather_nail_fast.wav,The sound of a nail rubbing on Leather at a fast speed.
+Leather\15.jpg,Leather\Leather_nail_middle.wav,The sound of a nail rubbing on Leather at a medium speed.
+Leather\10.jpg,Leather\Leather_nail_slow.wav,The sound of a nail rubbing on Leather at a slow speed.
+Leather\9.jpg,Leather\Leather_stick_fast.wav,The sound of a plastic stick rubbing on Leather at a fast speed.
+Leather\4.jpg,Leather\Leather_stick_middle.wav,The sound of a plastic stick rubbing on Leather at a medium speed.
+Leather\14.jpg,Leather\Leather_stick_slow.wav,The sound of a plastic stick rubbing on Leather at a slow speed.
+MicrofiberCloth1\13.jpg,MicrofiberCloth1\MicrofiberCloth1_finger_fast.wav,The sound of a finger rubbing on MicrofiberCloth at a fast speed.
+MicrofiberCloth1\9.jpg,MicrofiberCloth1\MicrofiberCloth1_finger_middle.wav,The sound of a finger rubbing on MicrofiberCloth at a medium speed.
+MicrofiberCloth1\19.jpg,MicrofiberCloth1\MicrofiberCloth1_finger_slow.wav,The sound of a finger rubbing on MicrofiberCloth at a slow speed.
+MicrofiberCloth1\6.jpg,MicrofiberCloth1\MicrofiberCloth1_nail_fast.wav,The sound of a nail rubbing on MicrofiberCloth at a fast speed.
+MicrofiberCloth1\12.jpg,MicrofiberCloth1\MicrofiberCloth1_nail_middle.wav,The sound of a nail rubbing on MicrofiberCloth at a medium speed.
+MicrofiberCloth1\18.jpg,MicrofiberCloth1\MicrofiberCloth1_nail_slow.wav,The sound of a nail rubbing on MicrofiberCloth at a slow speed.
+MicrofiberCloth1\10.jpg,MicrofiberCloth1\MicrofiberCloth1_stick_fast.wav,The sound of a plastic stick rubbing on MicrofiberCloth at a fast speed.
+MicrofiberCloth1\18.jpg,MicrofiberCloth1\MicrofiberCloth1_stick_middle.wav,The sound of a plastic stick rubbing on MicrofiberCloth at a medium speed.
+MicrofiberCloth1\4.jpg,MicrofiberCloth1\MicrofiberCloth1_stick_slow.wav,The sound of a plastic stick rubbing on MicrofiberCloth at a slow speed.
+MicrofiberCloth2\9.jpg,MicrofiberCloth2\MicrofiberCloth2_finger_fast.wav,The sound of a finger rubbing on MicrofiberCloth at a fast speed.
+MicrofiberCloth2\19.jpg,MicrofiberCloth2\MicrofiberCloth2_finger_middle.wav,The sound of a finger rubbing on MicrofiberCloth at a medium speed.
+MicrofiberCloth2\8.jpg,MicrofiberCloth2\MicrofiberCloth2_finger_slow.wav,The sound of a finger rubbing on MicrofiberCloth at a slow speed.
+MicrofiberCloth2\6.jpg,MicrofiberCloth2\MicrofiberCloth2_nail_fast.wav,The sound of a nail rubbing on MicrofiberCloth at a fast speed.
+MicrofiberCloth2\11.jpg,MicrofiberCloth2\MicrofiberCloth2_nail_middle.wav,The sound of a nail rubbing on MicrofiberCloth at a medium speed.
+MicrofiberCloth2\14.jpg,MicrofiberCloth2\MicrofiberCloth2_nail_slow.wav,The sound of a nail rubbing on MicrofiberCloth at a slow speed.
+MicrofiberCloth2\7.jpg,MicrofiberCloth2\MicrofiberCloth2_stick_fast.wav,The sound of a plastic stick rubbing on MicrofiberCloth at a fast speed.
+MicrofiberCloth2\15.jpg,MicrofiberCloth2\MicrofiberCloth2_stick_middle.wav,The sound of a plastic stick rubbing on MicrofiberCloth at a medium speed.
+MicrofiberCloth2\5.jpg,MicrofiberCloth2\MicrofiberCloth2_stick_slow.wav,The sound of a plastic stick rubbing on MicrofiberCloth at a slow speed.
+MicrofiberCloth3\13.jpg,MicrofiberCloth3\MicrofiberCloth2_finger_fast.wav,The sound of a finger rubbing on MicrofiberCloth at a fast speed.
+MicrofiberCloth3\10.jpg,MicrofiberCloth3\MicrofiberCloth2_finger_middle.wav,The sound of a finger rubbing on MicrofiberCloth at a medium speed.
+MicrofiberCloth3\6.jpg,MicrofiberCloth3\MicrofiberCloth2_finger_slow.wav,The sound of a finger rubbing on MicrofiberCloth at a slow speed.
+MicrofiberCloth3\17.jpg,MicrofiberCloth3\MicrofiberCloth2_nail_fast.wav,The sound of a nail rubbing on MicrofiberCloth at a fast speed.
+MicrofiberCloth3\15.jpg,MicrofiberCloth3\MicrofiberCloth2_nail_middle.wav,The sound of a nail rubbing on MicrofiberCloth at a medium speed.
+MicrofiberCloth3\6.jpg,MicrofiberCloth3\MicrofiberCloth2_nail_slow.wav,The sound of a nail rubbing on MicrofiberCloth at a slow speed.
+MicrofiberCloth3\3.jpg,MicrofiberCloth3\MicrofiberCloth2_stick_fast.wav,The sound of a plastic stick rubbing on MicrofiberCloth at a fast speed.
+MicrofiberCloth3\3.jpg,MicrofiberCloth3\MicrofiberCloth2_stick_middle.wav,The sound of a plastic stick rubbing on MicrofiberCloth at a medium speed.
+MicrofiberCloth3\8.jpg,MicrofiberCloth3\MicrofiberCloth2_stick_slow.wav,The sound of a plastic stick rubbing on MicrofiberCloth at a slow speed.
+NonSlipMat\3.jpg,NonSlipMat\NonSlipMat_finger_fast.wav,The sound of a finger rubbing on NonSlipMat at a fast speed.
+NonSlipMat\5.jpg,NonSlipMat\NonSlipMat_finger_middle.wav,The sound of a finger rubbing on NonSlipMat at a medium speed.
+NonSlipMat\4.jpg,NonSlipMat\NonSlipMat_finger_slow.wav,The sound of a finger rubbing on NonSlipMat at a slow speed.
+NonSlipMat\16.jpg,NonSlipMat\NonSlipMat_nail_fast.wav,The sound of a nail rubbing on NonSlipMat at a fast speed.
+NonSlipMat\12.jpg,NonSlipMat\NonSlipMat_nail_middle.wav,The sound of a nail rubbing on NonSlipMat at a medium speed.
+NonSlipMat\11.jpg,NonSlipMat\NonSlipMat_nail_slow.wav,The sound of a nail rubbing on NonSlipMat at a slow speed.
+NonSlipMat\16.jpg,NonSlipMat\NonSlipMat_stick_fast.wav,The sound of a plastic stick rubbing on NonSlipMat at a fast speed.
+NonSlipMat\10.jpg,NonSlipMat\NonSlipMat_stick_middle.wav,The sound of a plastic stick rubbing on NonSlipMat at a medium speed.
+NonSlipMat\9.jpg,NonSlipMat\NonSlipMat_stick_slow.wav,The sound of a plastic stick rubbing on NonSlipMat at a slow speed.
+PaperWoven\6.jpg,PaperWoven\PaperWoven_finger_fast.wav,The sound of a finger rubbing on PaperWoven at a fast speed.
+PaperWoven\7.jpg,PaperWoven\PaperWoven_finger_middle.wav,The sound of a finger rubbing on PaperWoven at a medium speed.
+PaperWoven\15.jpg,PaperWoven\PaperWoven_finger_slow.wav,The sound of a finger rubbing on PaperWoven at a slow speed.
+PaperWoven\13.jpg,PaperWoven\PaperWoven_nail_fast.wav,The sound of a nail rubbing on PaperWoven at a fast speed.
+PaperWoven\17.jpg,PaperWoven\PaperWoven_nail_middle.wav,The sound of a nail rubbing on PaperWoven at a medium speed.
+PaperWoven\18.jpg,PaperWoven\PaperWoven_nail_slow.wav,The sound of a nail rubbing on PaperWoven at a slow speed.
+PaperWoven\1.jpg,PaperWoven\PaperWoven_stick_fast.wav,The sound of a plastic stick rubbing on PaperWoven at a fast speed.
+PaperWoven\16.jpg,PaperWoven\PaperWoven_stick_middle.wav,The sound of a plastic stick rubbing on PaperWoven at a medium speed.
+PaperWoven\19.jpg,PaperWoven\PaperWoven_stick_slow.wav,The sound of a plastic stick rubbing on PaperWoven at a slow speed.
+PlaceMat\16.jpg,PlaceMat\PlaceMat_finger_fast.wav,The sound of a finger rubbing on PlaceMat at a fast speed.
+PlaceMat\4.jpg,PlaceMat\PlaceMat_finger_middle.wav,The sound of a finger rubbing on PlaceMat at a medium speed.
+PlaceMat\18.jpg,PlaceMat\PlaceMat_finger_slow.wav,The sound of a finger rubbing on PlaceMat at a slow speed.
+PlaceMat\13.jpg,PlaceMat\PlaceMat_nail_fast.wav,The sound of a nail rubbing on PlaceMat at a fast speed.
+PlaceMat\9.jpg,PlaceMat\PlaceMat_nail_middle.wav,The sound of a nail rubbing on PlaceMat at a medium speed.
+PlaceMat\5.jpg,PlaceMat\PlaceMat_nail_slow.wav,The sound of a nail rubbing on PlaceMat at a slow speed.
+PlaceMat\12.jpg,PlaceMat\PlaceMat_stick_fast.wav,The sound of a plastic stick rubbing on PlaceMat at a fast speed.
+PlaceMat\2.jpg,PlaceMat\PlaceMat_stick_middle.wav,The sound of a plastic stick rubbing on PlaceMat at a medium speed.
+PlaceMat\20.jpg,PlaceMat\PlaceMat_stick_slow.wav,The sound of a plastic stick rubbing on PlaceMat at a slow speed.
+PolyethyleneMesh\16.jpg,PolyethyleneMesh\PolyethyleneMesh_finger_fast.wav,The sound of a finger rubbing on PolyethyleneMesh at a fast speed.
+PolyethyleneMesh\16.jpg,PolyethyleneMesh\PolyethyleneMesh_finger_middle.wav,The sound of a finger rubbing on PolyethyleneMesh at a medium speed.
+PolyethyleneMesh\20.jpg,PolyethyleneMesh\PolyethyleneMesh_finger_slow.wav,The sound of a finger rubbing on PolyethyleneMesh at a slow speed.
+PolyethyleneMesh\13.jpg,PolyethyleneMesh\PolyethyleneMesh_nail_fast.wav,The sound of a nail rubbing on PolyethyleneMesh at a fast speed.
+PolyethyleneMesh\14.jpg,PolyethyleneMesh\PolyethyleneMesh_nail_middle.wav,The sound of a nail rubbing on PolyethyleneMesh at a medium speed.
+PolyethyleneMesh\14.jpg,PolyethyleneMesh\PolyethyleneMesh_nail_slow.wav,The sound of a nail rubbing on PolyethyleneMesh at a slow speed.
+PolyethyleneMesh\13.jpg,PolyethyleneMesh\PolyethyleneMesh_stick_fast.wav,The sound of a plastic stick rubbing on PolyethyleneMesh at a fast speed.
+PolyethyleneMesh\14.jpg,PolyethyleneMesh\PolyethyleneMesh_stick_middle.wav,The sound of a plastic stick rubbing on PolyethyleneMesh at a medium speed.
+PolyethyleneMesh\1.jpg,PolyethyleneMesh\PolyethyleneMesh_stick_slow.wav,The sound of a plastic stick rubbing on PolyethyleneMesh at a slow speed.
+PolymericFoam\5.jpg,PolymericFoam\PolymericFoam_finger_fast.wav,The sound of a finger rubbing on PolymericFoam at a fast speed.
+PolymericFoam\19.jpg,PolymericFoam\PolymericFoam_finger_middle.wav,The sound of a finger rubbing on PolymericFoam at a medium speed.
+PolymericFoam\10.jpg,PolymericFoam\PolymericFoam_finger_slow.wav,The sound of a finger rubbing on PolymericFoam at a slow speed.
+PolymericFoam\4.jpg,PolymericFoam\PolymericFoam_nail_fast.wav,The sound of a nail rubbing on PolymericFoam at a fast speed.
+PolymericFoam\6.jpg,PolymericFoam\PolymericFoam_nail_middle.wav,The sound of a nail rubbing on PolymericFoam at a medium speed.
+PolymericFoam\18.jpg,PolymericFoam\PolymericFoam_nail_slow.wav,The sound of a nail rubbing on PolymericFoam at a slow speed.
+PolymericFoam\15.jpg,PolymericFoam\PolymericFoam_stick_fast.wav,The sound of a plastic stick rubbing on PolymericFoam at a fast speed.
+PolymericFoam\11.jpg,PolymericFoam\PolymericFoam_stick_middle.wav,The sound of a plastic stick rubbing on PolymericFoam at a medium speed.
+PolymericFoam\8.jpg,PolymericFoam\PolymericFoam_stick_slow.wav,The sound of a plastic stick rubbing on PolymericFoam at a slow speed.
+Ribbon\8.jpg,Ribbon\ribbon_finger_fast.wav,The sound of a finger rubbing on Ribbon at a fast speed.
+Ribbon\3.jpg,Ribbon\ribbon_finger_middle.wav,The sound of a finger rubbing on Ribbon at a medium speed.
+Ribbon\20.jpg,Ribbon\ribbon_finger_slow.wav,The sound of a finger rubbing on Ribbon at a slow speed.
+Ribbon\17.jpg,Ribbon\ribbon_nail_fast.wav,The sound of a nail rubbing on Ribbon at a fast speed.
+Ribbon\6.jpg,Ribbon\ribbon_nail_middle.wav,The sound of a nail rubbing on Ribbon at a medium speed.
+Ribbon\19.jpg,Ribbon\ribbon_nail_slow.wav,The sound of a nail rubbing on Ribbon at a slow speed.
+Ribbon\13.jpg,Ribbon\ribbon_stick_fast.wav,The sound of a plastic stick rubbing on Ribbon at a fast speed.
+Ribbon\7.jpg,Ribbon\ribbon_stick_middle.wav,The sound of a plastic stick rubbing on Ribbon at a medium speed.
+Ribbon\14.jpg,Ribbon\ribbon_stick_slow.wav,The sound of a plastic stick rubbing on Ribbon at a slow speed.
+SteelPlate\17.jpg,SteelPlate\SteelPlate_unflat_finger_fast.wav,The sound of a finger rubbing on SteelPlate at a fast speed.
+SteelPlate\7.jpg,SteelPlate\SteelPlate_unflat_finger_middle.wav,The sound of a finger rubbing on SteelPlate at a medium speed.
+SteelPlate\17.jpg,SteelPlate\SteelPlate_unflat_finger_slow.wav,The sound of a finger rubbing on SteelPlate at a slow speed.
+SteelPlate\6.jpg,SteelPlate\SteelPlate_unflat_nail_fast.wav,The sound of a nail rubbing on SteelPlate at a fast speed.
+SteelPlate\8.jpg,SteelPlate\SteelPlate_unflat_nail_middle.wav,The sound of a nail rubbing on SteelPlate at a medium speed.
+SteelPlate\4.jpg,SteelPlate\SteelPlate_unflat_nail_slow.wav,The sound of a nail rubbing on SteelPlate at a slow speed.
+SteelPlate\8.jpg,SteelPlate\SteelPlate_unflat_stick_fast.wav,The sound of a plastic stick rubbing on SteelPlate at a fast speed.
+SteelPlate\11.jpg,SteelPlate\SteelPlate_unflat_stick_middle.wav,The sound of a plastic stick rubbing on SteelPlate at a medium speed.
+SteelPlate\7.jpg,SteelPlate\SteelPlate_unflat_stick_slow.wav,The sound of a plastic stick rubbing on SteelPlate at a slow speed.
+Stone1\1.jpg,Stone1\Stone1_finger_fast.wav,The sound of a finger rubbing on Stone at a fast speed.
+Stone1\15.jpg,Stone1\Stone1_finger_middle.wav,The sound of a finger rubbing on Stone at a medium speed.
+Stone1\5.jpg,Stone1\Stone1_finger_slow.wav,The sound of a finger rubbing on Stone at a slow speed.
+Stone1\17.jpg,Stone1\Stone1_nail_fast.wav,The sound of a nail rubbing on Stone at a fast speed.
+Stone1\2.jpg,Stone1\Stone1_nail_middle.wav,The sound of a nail rubbing on Stone at a medium speed.
+Stone1\15.jpg,Stone1\Stone1_nail_slow.wav,The sound of a nail rubbing on Stone at a slow speed.
+Stone1\3.jpg,Stone1\Stone1_stick_fast.wav,The sound of a plastic stick rubbing on Stone at a fast speed.
+Stone1\14.jpg,Stone1\Stone1_stick_middle.wav,The sound of a plastic stick rubbing on Stone at a medium speed.
+Stone1\10.jpg,Stone1\Stone1_stick_slow.wav,The sound of a plastic stick rubbing on Stone at a slow speed.
+Stone2\9.jpg,Stone2\Stone2_finger_fast.wav,The sound of a finger rubbing on Stone at a fast speed.
+Stone2\11.jpg,Stone2\Stone2_finger_middle.wav,The sound of a finger rubbing on Stone at a medium speed.
+Stone2\3.jpg,Stone2\Stone2_finger_slow.wav,The sound of a finger rubbing on Stone at a slow speed.
+Stone2\19.jpg,Stone2\Stone2_nail_fast.wav,The sound of a nail rubbing on Stone at a fast speed.
+Stone2\10.jpg,Stone2\Stone2_nail_middle.wav,The sound of a nail rubbing on Stone at a medium speed.
+Stone2\19.jpg,Stone2\Stone2_nail_slow.wav,The sound of a nail rubbing on Stone at a slow speed.
+Stone2\18.jpg,Stone2\Stone2_stick_fast.wav,The sound of a plastic stick rubbing on Stone at a fast speed.
+Stone2\12.jpg,Stone2\Stone2_stick_middle.wav,The sound of a plastic stick rubbing on Stone at a medium speed.
+Stone2\11.jpg,Stone2\Stone2_stick_slow.wav,The sound of a plastic stick rubbing on Stone at a slow speed.
+StoneTextureSheet\6.jpg,StoneTextureSheet\StoneTextureSheet_finger_fast.wav,The sound of a finger rubbing on StoneTextureSheet at a fast speed.
+StoneTextureSheet\11.jpg,StoneTextureSheet\StoneTextureSheet_finger_middle.wav,The sound of a finger rubbing on StoneTextureSheet at a medium speed.
+StoneTextureSheet\2.jpg,StoneTextureSheet\StoneTextureSheet_finger_slow.wav,The sound of a finger rubbing on StoneTextureSheet at a slow speed.
+StoneTextureSheet\20.jpg,StoneTextureSheet\StoneTextureSheet_nail_fast.wav,The sound of a nail rubbing on StoneTextureSheet at a fast speed.
+StoneTextureSheet\4.jpg,StoneTextureSheet\StoneTextureSheet_nail_middle.wav,The sound of a nail rubbing on StoneTextureSheet at a medium speed.
+StoneTextureSheet\8.jpg,StoneTextureSheet\StoneTextureSheet_nail_slow.wav,The sound of a nail rubbing on StoneTextureSheet at a slow speed.
+StoneTextureSheet\9.jpg,StoneTextureSheet\StoneTextureSheet_stick_fast.wav,The sound of a plastic stick rubbing on StoneTextureSheet at a fast speed.
+StoneTextureSheet\8.jpg,StoneTextureSheet\StoneTextureSheet_stick_middle.wav,The sound of a plastic stick rubbing on StoneTextureSheet at a medium speed.
+StoneTextureSheet\16.jpg,StoneTextureSheet\StoneTextureSheet_stick_slow.wav,The sound of a plastic stick rubbing on StoneTextureSheet at a slow speed.
+Throw\13.jpg,Throw\Throw_finger_fast.wav,The sound of a finger rubbing on Throw at a fast speed.
+Throw\6.jpg,Throw\Throw_finger_middle.wav,The sound of a finger rubbing on Throw at a medium speed.
+Throw\4.jpg,Throw\Throw_finger_slow.wav,The sound of a finger rubbing on Throw at a slow speed.
+Throw\18.jpg,Throw\Throw_nail_fast.wav,The sound of a nail rubbing on Throw at a fast speed.
+Throw\11.jpg,Throw\Throw_nail_middle.wav,The sound of a nail rubbing on Throw at a medium speed.
+Throw\19.jpg,Throw\Throw_nail_slow.wav,The sound of a nail rubbing on Throw at a slow speed.
+Throw\17.jpg,Throw\Throw_stick_fast.wav,The sound of a plastic stick rubbing on Throw at a fast speed.
+Throw\20.jpg,Throw\Throw_stick_middle.wav,The sound of a plastic stick rubbing on Throw at a medium speed.
+Throw\3.jpg,Throw\Throw_stick_slow.wav,The sound of a plastic stick rubbing on Throw at a slow speed.
+Towel1\4.jpg,Towel1\Towel1_finger_fast.wav,The sound of a finger rubbing on Towel at a fast speed.
+Towel1\13.jpg,Towel1\Towel1_finger_middle.wav,The sound of a finger rubbing on Towel at a medium speed.
+Towel1\16.jpg,Towel1\Towel1_finger_slow.wav,The sound of a finger rubbing on Towel at a slow speed.
+Towel1\15.jpg,Towel1\Towel1_nail_fast.wav,The sound of a nail rubbing on Towel at a fast speed.
+Towel1\8.jpg,Towel1\Towel1_nail_middle.wav,The sound of a nail rubbing on Towel at a medium speed.
+Towel1\17.jpg,Towel1\Towel1_nail_slow.wav,The sound of a nail rubbing on Towel at a slow speed.
+Towel1\20.jpg,Towel1\Towel1_stick_fast.wav,The sound of a plastic stick rubbing on Towel at a fast speed.
+Towel1\9.jpg,Towel1\Towel1_stick_middle.wav,The sound of a plastic stick rubbing on Towel at a medium speed.
+Towel1\20.jpg,Towel1\Towel1_stick_slow.wav,The sound of a plastic stick rubbing on Towel at a slow speed.
+Towel2\12.jpg,Towel2\Towel2_finger_fast.wav,The sound of a finger rubbing on Towel at a fast speed.
+Towel2\7.jpg,Towel2\Towel2_finger_middle.wav,The sound of a finger rubbing on Towel at a medium speed.
+Towel2\13.jpg,Towel2\Towel2_finger_slow.wav,The sound of a finger rubbing on Towel at a slow speed.
+Towel2\5.jpg,Towel2\Towel2_nail_fast.wav,The sound of a nail rubbing on Towel at a fast speed.
+Towel2\5.jpg,Towel2\Towel2_nail_middle.wav,The sound of a nail rubbing on Towel at a medium speed.
+Towel2\5.jpg,Towel2\Towel2_nail_slow.wav,The sound of a nail rubbing on Towel at a slow speed.
+Towel2\15.jpg,Towel2\Towel2_stick_fast.wav,The sound of a plastic stick rubbing on Towel at a fast speed.
+Towel2\6.jpg,Towel2\Towel2_stick_middle.wav,The sound of a plastic stick rubbing on Towel at a medium speed.
+Towel2\4.jpg,Towel2\Towel2_stick_slow.wav,The sound of a plastic stick rubbing on Towel at a slow speed.
+Wallpaper1\14.jpg,Wallpaper1\Wallpaper1_finger_fast.wav,The sound of a finger rubbing on Wallpaper at a fast speed.
+Wallpaper1\7.jpg,Wallpaper1\Wallpaper1_finger_middle.wav,The sound of a finger rubbing on Wallpaper at a medium speed.
+Wallpaper1\9.jpg,Wallpaper1\Wallpaper1_finger_slow.wav,The sound of a finger rubbing on Wallpaper at a slow speed.
+Wallpaper1\10.jpg,Wallpaper1\Wallpaper1_nail_fast.wav,The sound of a nail rubbing on Wallpaper at a fast speed.
+Wallpaper1\9.jpg,Wallpaper1\Wallpaper1_nail_middle.wav,The sound of a nail rubbing on Wallpaper at a medium speed.
+Wallpaper1\12.jpg,Wallpaper1\Wallpaper1_nail_slow.wav,The sound of a nail rubbing on Wallpaper at a slow speed.
+Wallpaper1\9.jpg,Wallpaper1\Wallpaper1_stick_fast.wav,The sound of a plastic stick rubbing on Wallpaper at a fast speed.
+Wallpaper1\7.jpg,Wallpaper1\Wallpaper1_stick_middle.wav,The sound of a plastic stick rubbing on Wallpaper at a medium speed.
+Wallpaper1\10.jpg,Wallpaper1\Wallpaper1_stick_slow.wav,The sound of a plastic stick rubbing on Wallpaper at a slow speed.
+Wallpaper2\4.jpg,Wallpaper2\Wallpaper2_finger_fast.wav,The sound of a finger rubbing on Wallpaper at a fast speed.
+Wallpaper2\4.jpg,Wallpaper2\Wallpaper2_finger_middle.wav,The sound of a finger rubbing on Wallpaper at a medium speed.
+Wallpaper2\6.jpg,Wallpaper2\Wallpaper2_finger_slow.wav,The sound of a finger rubbing on Wallpaper at a slow speed.
+Wallpaper2\4.jpg,Wallpaper2\Wallpaper2_nail_fast.wav,The sound of a nail rubbing on Wallpaper at a fast speed.
+Wallpaper2\20.jpg,Wallpaper2\Wallpaper2_nail_middle.wav,The sound of a nail rubbing on Wallpaper at a medium speed.
+Wallpaper2\4.jpg,Wallpaper2\Wallpaper2_nail_slow.wav,The sound of a nail rubbing on Wallpaper at a slow speed.
+Wallpaper2\7.jpg,Wallpaper2\Wallpaper2_stick_fast.wav,The sound of a plastic stick rubbing on Wallpaper at a fast speed.
+Wallpaper2\19.jpg,Wallpaper2\Wallpaper2_stick_middle.wav,The sound of a plastic stick rubbing on Wallpaper at a medium speed.
+Wallpaper2\16.jpg,Wallpaper2\Wallpaper2_stick_slow.wav,The sound of a plastic stick rubbing on Wallpaper at a slow speed.
+Wipe\9.jpg,Wipe\Wipe_finger_fast.wav,The sound of a finger rubbing on Wipe at a fast speed.
+Wipe\3.jpg,Wipe\Wipe_finger_middle.wav,The sound of a finger rubbing on Wipe at a medium speed.
+Wipe\4.jpg,Wipe\Wipe_finger_slow.wav,The sound of a finger rubbing on Wipe at a slow speed.
+Wipe\3.jpg,Wipe\Wipe_nail_fast.wav,The sound of a nail rubbing on Wipe at a fast speed.
+Wipe\16.jpg,Wipe\Wipe_nail_middle.wav,The sound of a nail rubbing on Wipe at a medium speed.
+Wipe\20.jpg,Wipe\Wipe_nail_slow.wav,The sound of a nail rubbing on Wipe at a slow speed.
+Wipe\3.jpg,Wipe\Wipe_stick_fast.wav,The sound of a plastic stick rubbing on Wipe at a fast speed.
+Wipe\18.jpg,Wipe\Wipe_stick_middle.wav,The sound of a plastic stick rubbing on Wipe at a medium speed.
+Wipe\8.jpg,Wipe\Wipe_stick_slow.wav,The sound of a plastic stick rubbing on Wipe at a slow speed.
+Wood1\10.jpg,Wood1\Wood1_finger_paral_fast.wav,The sound of a finger rubbing on Wood at a fast speed parallel to the grain.
+Wood1\5.jpg,Wood1\Wood1_finger_paral_middle.wav,The sound of a finger rubbing on Wood at a medium speed parallel to the grain.
+Wood1\19.jpg,Wood1\Wood1_finger_paral_slow.wav,The sound of a finger rubbing on Wood at a slow speed parallel to the grain.
+Wood1\17.jpg,Wood1\Wood1_finger_verti_fast.wav,The sound of a finger rubbing on Wood at a fast speed perpendicular to the grain.
+Wood1\6.jpg,Wood1\Wood1_finger_verti_middle.wav,The sound of a finger rubbing on Wood at a medium speed perpendicular to the grain.
+Wood1\14.jpg,Wood1\Wood1_finger_verti_slow.wav,The sound of a finger rubbing on Wood at a slow speed perpendicular to the grain.
+Wood1\16.jpg,Wood1\Wood1_nail_paral_fast.wav,The sound of a nail rubbing on Wood at a fast speed parallel to the grain.
+Wood1\18.jpg,Wood1\Wood1_nail_paral_middle.wav,The sound of a nail rubbing on Wood at a medium speed parallel to the grain.
+Wood1\14.jpg,Wood1\Wood1_nail_paral_slow.wav,The sound of a nail rubbing on Wood at a slow speed parallel to the grain.
+Wood1\14.jpg,Wood1\Wood1_nail_verti_fast.wav,The sound of a nail rubbing on Wood at a fast speed perpendicular to the grain.
+Wood1\12.jpg,Wood1\Wood1_nail_verti_middle.wav,The sound of a nail rubbing on Wood at a medium speed perpendicular to the grain.
+Wood1\15.jpg,Wood1\Wood1_nail_verti_slow.wav,The sound of a nail rubbing on Wood at a slow speed perpendicular to the grain.
+Wood1\20.jpg,Wood1\Wood1_stick_paral_fast.wav,The sound of a plastic stick rubbing on Wood at a fast speed parallel to the grain.
+Wood1\2.jpg,Wood1\Wood1_stick_paral_middle.wav,The sound of a plastic stick rubbing on Wood at a medium speed parallel to the grain.
+Wood1\10.jpg,Wood1\Wood1_stick_paral_slow.wav,The sound of a plastic stick rubbing on Wood at a slow speed parallel to the grain.
+Wood1\13.jpg,Wood1\Wood1_stick_verti_fast.wav,The sound of a plastic stick rubbing on Wood at a fast speed perpendicular to the grain.
+Wood1\8.jpg,Wood1\Wood1_stick_verti_middle.wav,The sound of a plastic stick rubbing on Wood at a medium speed perpendicular to the grain.
+Wood1\7.jpg,Wood1\Wood1_stick_verti_slow.wav,The sound of a plastic stick rubbing on Wood at a slow speed perpendicular to the grain.
+Wood2\8.jpg,Wood2\Wood2_finger_paral_fast.wav,The sound of a finger rubbing on Wood at a fast speed parallel to the grain.
+Wood2\12.jpg,Wood2\Wood2_finger_paral_middle.wav,The sound of a finger rubbing on Wood at a medium speed parallel to the grain.
+Wood2\9.jpg,Wood2\Wood2_finger_paral_slow.wav,The sound of a finger rubbing on Wood at a slow speed parallel to the grain.
+Wood2\16.jpg,Wood2\Wood2_finger_verti_fast.wav,The sound of a finger rubbing on Wood at a fast speed perpendicular to the grain.
+Wood2\16.jpg,Wood2\Wood2_finger_verti_middle.wav,The sound of a finger rubbing on Wood at a medium speed perpendicular to the grain.
+Wood2\19.jpg,Wood2\Wood2_finger_verti_slow.wav,The sound of a finger rubbing on Wood at a slow speed perpendicular to the grain.
+Wood2\15.jpg,Wood2\Wood2_nail_paral_fast.wav,The sound of a nail rubbing on Wood at a fast speed parallel to the grain.
+Wood2\15.jpg,Wood2\Wood2_nail_paral_middle.wav,The sound of a nail rubbing on Wood at a medium speed parallel to the grain.
+Wood2\6.jpg,Wood2\Wood2_nail_paral_slow.wav,The sound of a nail rubbing on Wood at a slow speed parallel to the grain.
+Wood2\15.jpg,Wood2\Wood2_nail_verti_fast.wav,The sound of a nail rubbing on Wood at a fast speed perpendicular to the grain.
+Wood2\15.jpg,Wood2\Wood2_nail_verti_middle.wav,The sound of a nail rubbing on Wood at a medium speed perpendicular to the grain.
+Wood2\12.jpg,Wood2\Wood2_nail_verti_slow.wav,The sound of a nail rubbing on Wood at a slow speed perpendicular to the grain.
+Wood2\8.jpg,Wood2\Wood2_stick_paral_fast.wav,The sound of a plastic stick rubbing on Wood at a fast speed parallel to the grain.
+Wood2\18.jpg,Wood2\Wood2_stick_paral_middle.wav,The sound of a plastic stick rubbing on Wood at a medium speed parallel to the grain.
+Wood2\13.jpg,Wood2\Wood2_stick_paral_slow.wav,The sound of a plastic stick rubbing on Wood at a slow speed parallel to the grain.
+Wood2\10.jpg,Wood2\Wood2_stick_verti_fast.wav,The sound of a plastic stick rubbing on Wood at a fast speed perpendicular to the grain.
+Wood2\7.jpg,Wood2\Wood2_stick_verti_middle.wav,The sound of a plastic stick rubbing on Wood at a medium speed perpendicular to the grain.
+Wood2\6.jpg,Wood2\Wood2_stick_verti_slow.wav,The sound of a plastic stick rubbing on Wood at a slow speed perpendicular to the grain.
+Wood3\4.jpg,Wood3\Wood3_finger_paral_fast.wav,The sound of a finger rubbing on Wood at a fast speed parallel to the grain.
+Wood3\17.jpg,Wood3\Wood3_finger_paral_middle.wav,The sound of a finger rubbing on Wood at a medium speed parallel to the grain.
+Wood3\9.jpg,Wood3\Wood3_finger_paral_slow.wav,The sound of a finger rubbing on Wood at a slow speed parallel to the grain.
+Wood3\19.jpg,Wood3\Wood3_finger_verti_fast.wav,The sound of a finger rubbing on Wood at a fast speed perpendicular to the grain.
+Wood3\12.jpg,Wood3\Wood3_finger_verti_middle.wav,The sound of a finger rubbing on Wood at a medium speed perpendicular to the grain.
+Wood3\8.jpg,Wood3\Wood3_finger_verti_slow.wav,The sound of a finger rubbing on Wood at a slow speed perpendicular to the grain.
+Wood3\5.jpg,Wood3\Wood3_nail_paral_fast.wav,The sound of a nail rubbing on Wood at a fast speed parallel to the grain.
+Wood3\2.jpg,Wood3\Wood3_nail_paral_middle.wav,The sound of a nail rubbing on Wood at a medium speed parallel to the grain.
+Wood3\5.jpg,Wood3\Wood3_nail_paral_slow.wav,The sound of a nail rubbing on Wood at a slow speed parallel to the grain.
+Wood3\17.jpg,Wood3\Wood3_nail_verti_fast.wav,The sound of a nail rubbing on Wood at a fast speed perpendicular to the grain.
+Wood3\13.jpg,Wood3\Wood3_nail_verti_middle.wav,The sound of a nail rubbing on Wood at a medium speed perpendicular to the grain.
+Wood3\18.jpg,Wood3\Wood3_nail_verti_slow.wav,The sound of a nail rubbing on Wood at a slow speed perpendicular to the grain.
+Wood3\15.jpg,Wood3\Wood3_stick_paral_fast.wav,The sound of a plastic stick rubbing on Wood at a fast speed parallel to the grain.
+Wood3\15.jpg,Wood3\Wood3_stick_paral_middle.wav,The sound of a plastic stick rubbing on Wood at a medium speed parallel to the grain.
+Wood3\4.jpg,Wood3\Wood3_stick_paral_slow.wav,The sound of a plastic stick rubbing on Wood at a slow speed parallel to the grain.
+Wood3\5.jpg,Wood3\Wood3_stick_verti_fast.wav,The sound of a plastic stick rubbing on Wood at a fast speed perpendicular to the grain.
+Wood3\6.jpg,Wood3\Wood3_stick_verti_middle.wav,The sound of a plastic stick rubbing on Wood at a medium speed perpendicular to the grain.
+Wood3\15.jpg,Wood3\Wood3_stick_verti_slow.wav,The sound of a plastic stick rubbing on Wood at a slow speed perpendicular to the grain.
+Wood4\4.jpg,Wood4\Wood4finger_verti_slow.wav,The sound of a unknown object rubbing on Wood at a slow speed perpendicular to the grain.
+Wood4\10.jpg,Wood4\Wood4_finger_paral_fast.wav,The sound of a finger rubbing on Wood at a fast speed parallel to the grain.
+Wood4\3.jpg,Wood4\Wood4_finger_paral_middle.wav,The sound of a finger rubbing on Wood at a medium speed parallel to the grain.
+Wood4\15.jpg,Wood4\Wood4_finger_paral_slow.wav,The sound of a finger rubbing on Wood at a slow speed parallel to the grain.
+Wood4\18.jpg,Wood4\Wood4_finger_verti_fast.wav,The sound of a finger rubbing on Wood at a fast speed perpendicular to the grain.
+Wood4\3.jpg,Wood4\Wood4_finger_verti_middle.wav,The sound of a finger rubbing on Wood at a medium speed perpendicular to the grain.
+Wood4\15.jpg,Wood4\Wood4_nail_paral_fast.wav,The sound of a nail rubbing on Wood at a fast speed parallel to the grain.
+Wood4\13.jpg,Wood4\Wood4_nail_paral_middle.wav,The sound of a nail rubbing on Wood at a medium speed parallel to the grain.
+Wood4\15.jpg,Wood4\Wood4_nail_paral_slow.wav,The sound of a nail rubbing on Wood at a slow speed parallel to the grain.
+Wood4\17.jpg,Wood4\Wood4_nail_verti_fast.wav,The sound of a nail rubbing on Wood at a fast speed perpendicular to the grain.
+Wood4\9.jpg,Wood4\Wood4_nail_verti_middle.wav,The sound of a nail rubbing on Wood at a medium speed perpendicular to the grain.
+Wood4\2.jpg,Wood4\Wood4_nail_verti_slow.wav,The sound of a nail rubbing on Wood at a slow speed perpendicular to the grain.
+Wood4\2.jpg,Wood4\Wood4_stick_paral_fast.wav,The sound of a plastic stick rubbing on Wood at a fast speed parallel to the grain.
+Wood4\18.jpg,Wood4\Wood4_stick_paral_middle.wav,The sound of a plastic stick rubbing on Wood at a medium speed parallel to the grain.
+Wood4\12.jpg,Wood4\Wood4_stick_paral_slow.wav,The sound of a plastic stick rubbing on Wood at a slow speed parallel to the grain.
+Wood4\16.jpg,Wood4\Wood4_stick_verti_fast.wav,The sound of a plastic stick rubbing on Wood at a fast speed perpendicular to the grain.
+Wood4\13.jpg,Wood4\Wood4_stick_verti_middle.wav,The sound of a plastic stick rubbing on Wood at a medium speed perpendicular to the grain.
+Wood4\20.jpg,Wood4\Wood4_stick_verti_slow.wav,The sound of a plastic stick rubbing on Wood at a slow speed perpendicular to the grain.
