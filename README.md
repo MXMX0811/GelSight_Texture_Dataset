@@ -23,7 +23,3 @@ If you find this repo is helpful, please cite:
       url={https://arxiv.org/abs/2601.16639}, 
 }
 ```
-
-## Acknowledgments
-
-This code is based on the implementations of [facebookresearch/DiT](https://github.com/facebookresearch/DiT).
